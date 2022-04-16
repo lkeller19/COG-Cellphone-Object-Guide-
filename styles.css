@@ -1,0 +1,104 @@
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+.background {
+  text-align: center;
+  background-color: white;
+}
+
+h2 {
+    border-top: 1px dashed black;
+    border-bottom: 1px dashed black;
+    width: 3em;
+    margin: auto;
+}
+
+h3 {
+    width: 7em;
+    margin: auto;
+}
+
+.cardfontcolor {
+    color: black;
+}
+
+.wid {
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+body {
+    color: black;
+    padding-top: 25px;
+}
+
+.center {
+    margin: auto;
+}
+
+/* taken from https://stackoverflow.com/questions/22196587/how-to-vertically-center-a-container-in-bootstrap */
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
+
+.card:hover {
+    border: 1px solid red;
+}
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -250px;
+    visibility: hidden;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 25vw;
+    object-fit: cover;
+}
+
+h4 {
+    text-decoration: underline;
+}
+
+.width {
+    max-width: 15em;
+}
