@@ -14,6 +14,7 @@ import requests
 # r = requests.get(url, params = {'format': 'json', 'query': query})
 # data = r.json()
 # print(data)
+# https://stackoverflow.com/questions/55961615/how-to-integrate-wikidata-query-in-python
 
 #ABOVE INFO CAN BE USED FOR QUERY ENTRIES
 
