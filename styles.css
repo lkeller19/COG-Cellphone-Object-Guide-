@@ -102,3 +102,25 @@ h4 {
 .width {
     max-width: 15em;
 }
+
+.image-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height:auto;
+}
+
+.entirebox {
+    width: 10%;
+    height: 10%;
+    border-radius: 15px;
+    border: 5px solid red;
+  }
+  
+#box {
+    background-color: white;
+    opacity: 1;
+}
