@@ -1,0 +1,12 @@
+SELECT DISTINCT ?item ?itemLabel ?image ?inscription ?translation ?position
+WHERE 
+{
+  ?item wdt:P8583 "6890";
+        wdt:P18 ?image;
+        p:P1684 ?statement1.
+  ?statement1 ps:P1684 ?inscription.
+  ?statement1 pq:P2441 ?translation.
+  ?statement1 pq:P2677 ?position.
+ 
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
