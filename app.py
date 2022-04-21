@@ -30,3 +30,6 @@ def index():
 def object():
     return render_template('scratch_object.html')
 
+@app.route("/qr_code")
+def qr_code():
+    return render_template('qr_code.html')
