@@ -31,8 +31,11 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route("/scratch_object")
+def scratch():
+    return render_template('scratch_object.html')
+
 @app.route("/object")
 def object():
     image = data["results"]["bindings"][0]["image"]["value"]
     return render_template('latin_object.html', image=image)
-
