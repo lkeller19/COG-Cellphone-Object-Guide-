@@ -67,8 +67,33 @@
                     </select>
 
                     <br>
-                    <h3>Inscription 1</h5>
-                    <h4>Translation</h4>
+                    <div>
+                        <!-- Loading in data from Flask and using Jinja to put the data onto the page-->
+                        <h1>Inscriptions on this Object</h1> <br>
+                        {%for entry in translations%}
+                            <h3>Inscription:</h3>
+                                <text>{{entry[0]}}</text>
+                            <h4>Translation:</h4>
+                                <text>{{entry[1]}}</text>
+                            <h4>Location on Image:</h4>
+                                <text>{{entry[2]}}</text>
+                                <br>
+                                <br>
+                        {%endfor%}
+                    </div>
+
+                    <div>
+                        <h1>Depictions on this Object</h1> <br>
+                        {%for entry in depictions%}
+                            <h3>Depicts:</h3>
+                                <a href="{{entry[0]}}">{{entry[0]}}</a>
+                            <h4>Location on Image:</h4>
+                                <text>{{entry[1]}}</text>
+                                <br>
+                                <br>
+                        {%endfor%}
+                    </div>
+
                     <a id="explanation">
                         <p> Explaination of what is going on </p>
                     </a>
