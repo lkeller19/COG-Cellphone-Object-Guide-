@@ -1,0 +1,268 @@
+{
+    "head": {
+        "vars": [
+            "item",
+            "itemLabel",
+            "image",
+            "depiction",
+            "position"
+        ]
+    },
+    "results": {
+        "bindings": [
+            {
+                "depiction": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q8229"
+                },
+                "image": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Latin%20Inscription%20-%20YDEA%20-%2034184.jpg"
+                },
+                "item": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q100311355"
+                },
+                "itemLabel": {
+                    "type": "literal",
+                    "value": "Latin Inscription, Yale University Art Gallery, inv. 1932.1207a",
+                    "xml:lang": "en"
+                },
+                "position": {
+                    "type": "literal",
+                    "value": "pct:58.309,35.648,27.4052,28.2799"
+                }
+            },
+            {
+                "depiction": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q8229"
+                },
+                "image": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Latin%20Inscription%20-%20YDEA%20-%2034184.jpg"
+                },
+                "item": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q100311355"
+                },
+                "itemLabel": {
+                    "type": "literal",
+                    "value": "Latin Inscription, Yale University Art Gallery, inv. 1932.1207a",
+                    "xml:lang": "en"
+                },
+                "position": {
+                    "type": "literal",
+                    "value": "pct:29.4461,63.6922,38.1924,7.30564"
+                }
+            },
+            {
+                "depiction": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q8229"
+                },
+                "image": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Latin%20Inscription%20-%20YDEA%20-%2034184.jpg"
+                },
+                "item": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q100311355"
+                },
+                "itemLabel": {
+                    "type": "literal",
+                    "value": "Latin Inscription, Yale University Art Gallery, inv. 1932.1207a",
+                    "xml:lang": "en"
+                },
+                "position": {
+                    "type": "literal",
+                    "value": "pct:36.2955,54.0719,12.223,6.28743"
+                }
+            },
+            {
+                "depiction": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q8229"
+                },
+                "image": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Latin%20Inscription%20-%20YDEA%20-%2034184.jpg"
+                },
+                "item": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q100311355"
+                },
+                "itemLabel": {
+                    "type": "literal",
+                    "value": "Latin Inscription, Yale University Art Gallery, inv. 1932.1207a",
+                    "xml:lang": "en"
+                },
+                "position": {
+                    "type": "literal",
+                    "value": "pct:14.433,6.45833,67.0103,28.75"
+                }
+            },
+            {
+                "depiction": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q28602"
+                },
+                "image": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Latin%20Inscription%20-%20YDEA%20-%2034184.jpg"
+                },
+                "item": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q100311355"
+                },
+                "itemLabel": {
+                    "type": "literal",
+                    "value": "Latin Inscription, Yale University Art Gallery, inv. 1932.1207a",
+                    "xml:lang": "en"
+                },
+                "position": {
+                    "type": "literal",
+                    "value": "pct:64.5528,68.0164,8.90083,5.79225"
+                }
+            },
+            {
+                "depiction": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q111589235"
+                },
+                "image": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Latin%20Inscription%20-%20YDEA%20-%2034184.jpg"
+                },
+                "item": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q100311355"
+                },
+                "itemLabel": {
+                    "type": "literal",
+                    "value": "Latin Inscription, Yale University Art Gallery, inv. 1932.1207a",
+                    "xml:lang": "en"
+                },
+                "position": {
+                    "type": "literal",
+                    "value": "pct:79.2635,40.5389,8.14371,3.9521"
+                }
+            },
+            {
+                "depiction": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q131306"
+                },
+                "image": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Latin%20Inscription%20-%20YDEA%20-%2034184.jpg"
+                },
+                "item": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q100311355"
+                },
+                "itemLabel": {
+                    "type": "literal",
+                    "value": "Latin Inscription, Yale University Art Gallery, inv. 1932.1207a",
+                    "xml:lang": "en"
+                },
+                "position": {
+                    "type": "literal",
+                    "value": "pct:16.4384,35.7379,82.4658,29.0114"
+                }
+            },
+            {
+                "depiction": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q188751"
+                },
+                "image": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Latin%20Inscription%20-%20YDEA%20-%2034184.jpg"
+                },
+                "item": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q100311355"
+                },
+                "itemLabel": {
+                    "type": "literal",
+                    "value": "Latin Inscription, Yale University Art Gallery, inv. 1932.1207a",
+                    "xml:lang": "en"
+                },
+                "position": {
+                    "type": "literal",
+                    "value": "pct:32.5915,16.3473,22.2236,5.38922"
+                }
+            },
+            {
+                "depiction": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q344185"
+                },
+                "image": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Latin%20Inscription%20-%20YDEA%20-%2034184.jpg"
+                },
+                "item": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q100311355"
+                },
+                "itemLabel": {
+                    "type": "literal",
+                    "value": "Latin Inscription, Yale University Art Gallery, inv. 1932.1207a",
+                    "xml:lang": "en"
+                },
+                "position": {
+                    "type": "literal",
+                    "value": "pct:33.3323,10.3593,23.7052,5.68862"
+                }
+            },
+            {
+                "depiction": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q357649"
+                },
+                "image": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Latin%20Inscription%20-%20YDEA%20-%2034184.jpg"
+                },
+                "item": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q100311355"
+                },
+                "itemLabel": {
+                    "type": "literal",
+                    "value": "Latin Inscription, Yale University Art Gallery, inv. 1932.1207a",
+                    "xml:lang": "en"
+                },
+                "position": {
+                    "type": "literal",
+                    "value": "pct:61.8551,56.7066,16.6628,2.75449"
+                }
+            },
+            {
+                "depiction": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q658866"
+                },
+                "image": {
+                    "type": "uri",
+                    "value": "http://commons.wikimedia.org/wiki/Special:FilePath/Latin%20Inscription%20-%20YDEA%20-%2034184.jpg"
+                },
+                "item": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q100311355"
+                },
+                "itemLabel": {
+                    "type": "literal",
+                    "value": "Latin Inscription, Yale University Art Gallery, inv. 1932.1207a",
+                    "xml:lang": "en"
+                },
+                "position": {
+                    "type": "literal",
+                    "value": "pct:63.4483,58.7787,13.7931,5.02012"
+                }
+            }
+        ]
+    }
+}
