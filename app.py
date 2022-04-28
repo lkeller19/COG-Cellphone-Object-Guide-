@@ -2,7 +2,7 @@ from turtle import position
 from flask import Flask, render_template
 import json
 import requests
-
+# import wptools -- doesn't work
 
 # probably best to load these queries in from the SPARQL-queries folder 
 # and put them in arrays or something for each page
@@ -67,7 +67,9 @@ def object():
         temp = []
         temp.append(all_transl[i]["inscription"]["value"])
         temp.append(all_transl[i]["translation"]["value"])
-        temp.append(all_transl[i]["position"]["value"])
+        temp.append(split_pos(all_transl[i]["position"]["value"]))
+
+        
         translations.append(temp)
     
     # print(translations)
@@ -79,7 +81,18 @@ def object():
     for i in range(len(all_depicts)):
         temp = []
         temp.append(all_depicts[i]["depiction"]["value"])
-        temp.append(all_depicts[i]["position"]["value"])
+        temp.append(split_pos(all_depicts[i]["position"]["value"]))
         depictions.append(temp)
 
     return render_template('latin_object.html', image=image, translations=translations, depictions=depictions)
+
+def split_pos(pos_string):
+    pct = []
+
+    temp = pos_string.split(":", maxsplit=1)
+    pct = temp[1].split(",")
+
+    pct = list(map(float, pct))
+    # print(pct)
+
+    return pct
