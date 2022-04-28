@@ -57,6 +57,9 @@ def index():
 def scratch():
     return render_template('scratch_object.html')
 
+@app.route("/qr_code")
+def qr_code():
+    return render_template('qr_code.html')
 @app.route("/object")
 def object():
     image = data["results"]["bindings"][0]["image"]["value"]
