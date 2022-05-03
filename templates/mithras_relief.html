@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- documentation at http://getbootstrap.com/docs/4.1/, alternative themes at https://bootswatch.com/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+        <link rel="shortcut icon" href="{{ url_for('static', filename='/gear.ico') }}">
+
+        <link href="/static/styles.css" rel="stylesheet">
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <title>COG</title>
+
+</head>
+
+    </head>
+    <br><br><br>
+    <body class="background" onload="addInfo()">
+            <nav class="navbar navbar-expand-md navbar-light border-bottom fixed-top scrolling-navbar background">
+                <a class="navbar-brand" href="/"><span style="color: gray;">COG</span></a>
+                <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+                        <ul class="navbar-nav ml-auto mt-2">
+                            <li class="nav-item"><a class="nav-link" href="#about">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#setlist">QR Code Generator</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#videos">Other Resources</a></li>
+                        </ul>
+                </div>
+            </nav>
+
+        <div class="vertical-center">
+            <main class="container">
+
+                <div class="wid">
+                    <a href="#explanation">
+                        <h1> Cult Relief of Mithras Slaying the Bull (Tauroctony) </h1>
+                    </a>
+                    <div class= "wrapper">
+                            <img src={{image}} alt="object1" class="img-fluid">
+                            {%for entry in translations%}
+                                <a href="#{{entry[0]}}">
+                                    <div class="boundingbox" style="left: {{entry[2][0]}}%; top: {{entry[2][1]}}%; padding-right: {{entry[2][2]}}%; padding-bottom: {{entry[2][3]}}%;" id="{{entry[0]}}.pos"></div>
+                                </a>
+                            {%endfor%}
+                            {%for entry in depictions%}
+                                <a href="#{{entry[0]}}">
+                                    <div class="boundingbox" style="left: {{entry[1][0]}}%; top: {{entry[1][1]}}%; padding-right: {{entry[1][2]}}%; padding-bottom: {{entry[1][3]}}%;" id="{{entry[0]}}.pos"></div>
+                                </a>
+                            {%endfor%}
+                    </div>
+
+                    <label for="colors">If desired, change bounding box outline color:</label>
+
+                    <select name="colors" id="colors">
+                        <option value="blue" selected>Blue</option>
+                        <option value="silver">Silver</option>
+                        <option value="red">Red</option>
+                        <option value="black">Black</option>
+                    </select>
+
+                    <br>
+                    <div>
+                        <!-- Loading in data from Flask and using Jinja to put the data onto the page-->
+                        <h1>Inscriptions on this Object</h1> <br>
+                        {%for entry in translations%}
+                            <div id="{{entry[0]}}">
+                                <h4> Inscription:</h4>
+                                    <text>{{entry[0]}}</text>
+                                    <br>
+                                <h4>Translation:</h4>
+                                    <text>{{entry[1]}}</text>
+                                    <br>
+                            </div>
+                            <a href="#{{entry[0]}}.pos"> 
+                                <h4>Location on Image</h4> 
+                            </a>
+                            <hr style="border-width:5px">    
+                        {%endfor%}
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <div>
+                        <h1>Depictions on this Object</h1> <br>
+                        {%for entry in depictions%}
+                            <div id="{{entry[0]}}">
+                                <h4>Depicts:</h4>
+                                    <a href="{{entry[0]}}">{{entry[0]}}</a>
+                                <a href="#{{entry[0]}}.pos"> 
+                                    <h4>Location on Image</h4> 
+                                </a>
+                            </div>
+                            <hr style="border-width:5px">
+                        {%endfor%}
+                    </div>
+
+                    <a id="explanation">
+                        <p> Explaination of what is going on </p>
+                    </a>
+                    <img src="/static/dura-satellite.jpg" alt="locational image">
+                </div>
+                <br>
+                <br>
+                <div class="border-top">
+                <br>
+                        <p>Contact: <a href="mailto:cog@yale.edu">cog@yale.edu</a></p>
+                </div>
+            </main>
+        </div>
+        <button id="btnScrollToTop"> 
+            <i class="material-icons">arrow_upward</i>
+        </button> 
+        <script> 
+            const btnScrollToTop = document.querySelector("#btnScrollToTop"); 
+            btnScrollToTop.addEventListener("click", function() { 
+                $("html, body").animate({scrollTop: 0 }, "slow"); 
+            }); 
+
+            
+            $("#colors").change(function(){
+                let color = $("#colors").val();
+                $('.boundingbox').css("border", "solid " + color);
+            });
+
+            function addInfo() {
+                
+            }
+
+        </script>
+    </body>
+
+</html>
