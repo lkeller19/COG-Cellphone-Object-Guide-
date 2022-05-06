@@ -96,6 +96,7 @@
             $("#colors").change(function(){
                 let color = $("#colors").val();
                 $('.boundingbox').css("border", "solid " + color);
+                $('path').css("fill", color);
             });
 
 

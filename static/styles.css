@@ -166,3 +166,15 @@ h4 {
     padding-right:10%
 }
 
+path {
+    fill: blue;
+}
+
+.pinpoint{
+    position:absolute;
+    width:50px;
+    height:50px;
+    top: 0%;
+    left: 0%;
+}
+
