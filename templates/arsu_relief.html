@@ -165,7 +165,21 @@
             }, false);
 
             function addInfo() {
-                
+                let newSection = document.createElement("h4")
+                newSection.innerHTML = "Editor's Note: Arsu"
+                let newInfo = document.createElement("text")
+                newInfo.innerHTML = "A Palmyrene deity, usually depicted with a helmet and small round shield. Here, unusually, he is bare-headed. Find out more about Arsu at https://en.wikipedia.org/wiki/Arsu"
+                // newSection.after(newInfo)
+                $("#אדצר\\ רממ׳א").append(newSection)
+                $("#אדצר\\ רממ׳א").append(newInfo)
+
+                let newSection2 = document.createElement("h4")
+                newSection2.innerHTML = "Editor's Note: The Camel Rider"
+                let newInfo2 = document.createElement("text")
+                newInfo2.innerHTML = "The translation ‘camel rider’ has been disputed by the various editors of this text. Robert Du Mesnil du Buisson originally offered the translation ‘the spear’, arguing that it represented thunder. H. Ingholt disputed this and suggested ‘camel rider’ instead, pointing to other depictions of Arsu in both Dura and Palmyra. Jean Starcky preferred ‘Arsu and the Rider’, arguing that this referred to a deity that is not depicted in the relief and Ingholt seems to have deferred to her opinion in the 1970s."
+                // newSection.after(newInfo)
+                $("#אדצר\\ רממ׳א").append(newSection2)
+                $("#אדצר\\ רממ׳א").append(newInfo2)
             }
 
         </script>
