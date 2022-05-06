@@ -105,7 +105,9 @@ def arsu_relief():
 
     info = parse_query_data(data[0], data[1])
 
-    return render_template('arsu_relief.html', image=info[0], translations=info[1], depictions=info[2])
+    titles = get_titles(info[2])
+
+    return render_template('arsu_relief.html', image=info[0], translations=info[1], depictions=info[2], page_titles=titles)
 
 @app.route("/gad_relief")
 def gad_relief():
@@ -114,7 +116,9 @@ def gad_relief():
 
     info = parse_query_data(data[0], data[1])
 
-    return render_template('gad_relief.html', image=info[0], translations=info[1], depictions=info[2])
+    titles = get_titles(info[2])
+
+    return render_template('gad_relief.html', image=info[0], translations=info[1], depictions=info[2], page_titles=titles)
 
 @app.route("/julius_terentius")
 def julius_terentius():
@@ -123,7 +127,9 @@ def julius_terentius():
 
     info = parse_query_data(data[0], data[1])
 
-    return render_template('julius_terentius.html', image=info[0], translations=info[1], depictions=info[2])
+    titles = get_titles(info[2])
+
+    return render_template('julius_terentius.html', image=info[0], translations=info[1], depictions=info[2], page_titles=titles)
 
 @app.route("/mithras_relief")
 def mithras_relief():
@@ -132,7 +138,9 @@ def mithras_relief():
 
     info = parse_query_data(data[0], data[1])
 
-    return render_template('mithras_relief.html', image=info[0], translations=info[1], depictions=info[2])
+    titles = get_titles(info[2])
+
+    return render_template('mithras_relief.html', image=info[0], translations=info[1], depictions=info[2], page_titles=titles)
 
 @app.route("/votive_relief")
 def votive_relief():
@@ -141,7 +149,9 @@ def votive_relief():
 
     info = parse_query_data(data[0], data[1])
 
-    return render_template('votive_relief.html', image=info[0], translations=info[1], depictions=info[2])
+    titles = get_titles(info[2])
+
+    return render_template('votive_relief.html', image=info[0], translations=info[1], depictions=info[2], page_titles=titles)
 
 def parse_query_data(data, d2):
     image = data["results"]["bindings"][0]["image"]["value"]
