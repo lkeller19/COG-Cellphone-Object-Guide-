@@ -2,6 +2,7 @@ from turtle import position
 from flask import Flask, render_template
 import json
 import requests
+
 # import wptools -- doesn't work
 
 # probably best to load these queries in from the SPARQL-queries folder 
@@ -67,7 +68,9 @@ def latin_inscription():
 
     info = parse_query_data(data[0], data[1])
 
-    return render_template('latin_object.html', image=info[0], translations=info[1], depictions=info[2])
+    titles = get_titles(info[2])
+
+    return render_template('latin_object.html', image=info[0], translations=info[1], depictions=info[2], page_titles=titles)
     # image = data["results"]["bindings"][0]["image"]["value"]
     # all_transl = data["results"]["bindings"]
     # translations = []
@@ -196,3 +199,12 @@ def split_pos(pos_string):
     # print(pct)
 
     return pct
+
+def get_titles(urls):
+    titles = []
+    for url in urls:
+        r = requests.get(url[0])
+        js = json.loads(r.content.decode('utf-8'))
+        title = js["entities"][list(js["entities"].keys())[0]]["labels"]["en"]["value"]
+        titles.append(title)
+    return titles
