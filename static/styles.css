@@ -166,6 +166,14 @@ h4 {
     padding-right:10%
 }
 
+.inscriptions {
+    display: block;
+}
+
+.depictions {
+    display: block;
+}
+
 path {
     fill: blue;
 }
