@@ -97,9 +97,10 @@
                     <div>
                         <h1>Depictions on this Object</h1> <br>
                         {%for entry in depictions%}
+                            {% set title = page_titles[loop.index-1] %}
                             <div id="{{entry[0]}}">
                                 <h4>Depicts:</h4>
-                                    <a href="{{entry[0]}}">{{entry[0]}}</a>
+                                    <a href="{{entry[0]}}">{{title}}</a>
                                 <a href="#{{entry[0]}}.pos"> 
                                     <h4>Location on Image</h4> 
                                 </a>
