@@ -47,7 +47,7 @@
 
                 <div class="wid">
                     <a href="#explanation">
-                        <h1> Latin Inscription </h1>
+                        <h1> Cult Relief of Mithras Slaying the Bull (Tauroctony) </h1>
                     </a>
                     <div class= "wrapper">
                             <img src={{image}} alt="object1" class="img-fluid">
@@ -97,10 +97,9 @@
                     <div>
                         <h1>Depictions on this Object</h1> <br>
                         {%for entry in depictions%}
-                            {% set title = page_titles[loop.index-1] %}
                             <div id="{{entry[0]}}">
                                 <h4>Depicts:</h4>
-                                    <a href="{{entry[0]}}">{{title}}</a>
+                                    <a href="{{entry[0]}}">{{entry[0]}}</a>
                                 <a href="#{{entry[0]}}.pos"> 
                                     <h4>Location on Image</h4> 
                                 </a>
@@ -112,21 +111,7 @@
                     <a id="explanation">
                         <p> Explaination of what is going on </p>
                     </a>
-                    <div class= "wrapper" onLoad="loadfunc(40.727421, 34.750515)">
-                        <img src="http://www.athenapub.com/aria1/_Syria/md_syria-dura-satellite.jpg" alt="map" class="img-fluid">
-                        <div id="pinpoint" class= "pinpoint" style= "">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="50" height="50" viewBox="0 0 256 256" xml:space="preserve" >
-                                <desc>Created with Fabric.js 1.7.22</desc>
-                                <defs>
-                                </defs>
-                                <g transform="translate(128 128) scale(0.72 0.72)" style="">
-                                    <g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(-175.05 -175.05000000000004) scale(3.89 3.89)" >
-                                    <path d="M 45 0 C 25.463 0 9.625 15.838 9.625 35.375 c 0 8.722 3.171 16.693 8.404 22.861 L 45 90 l 26.97 -31.765 c 5.233 -6.167 8.404 -14.139 8.404 -22.861 C 80.375 15.838 64.537 0 45 0 z M 45 48.705 c -8.035 0 -14.548 -6.513 -14.548 -14.548 c 0 -8.035 6.513 -14.548 14.548 -14.548 s 14.548 6.513 14.548 14.548 C 59.548 42.192 53.035 48.705 45 48.705 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
-                                </g>
-                                </g>
-                                </svg>
-                        </div>
-                    </div>
+                    <img src="/static/dura-satellite.jpg" alt="locational image">
                 </div>
                 <br>
                 <br>
@@ -145,44 +130,14 @@
                 $("html, body").animate({scrollTop: 0 }, "slow"); 
             }); 
 
-            document.addEventListener('DOMContentLoaded', function() {
-                const xval = (40.727421 * 60321.7158176944) - 2456580;
-                const yval = (34.750515 *  -79238.8525986936) + 2753796.232036354943122;
-                const xpercent = (xval / 703) * 100;
-                const ypercent = (yval / 800) * 100;
-                const xpercentstring = xpercent.toString() + '%';
-                const ypercentstring = ypercent.toString() + '%';
-                $('.pinpoint').css("top", ypercentstring);
-                $('.pinpoint').css("left", xpercentstring); 
-            }, false);
-
-        
-            // function loadfunc( x, y ) {
-            //     const xval = (x * 60321.7158176944) - 2456580;
-            //     const yval = (y *  -79238.8525986936) + 2753796.232036354943122;
-            //     const xpercent = (xval / 703) * 100;
-            //     const ypercent = (yval / 800) * 100;
-            //     const xpercentstring = xpercent.toString() + '%';
-            //     const ypercentstring = ypercent.toString() + '%';
-            //     $('.pinpoint').css("top", ypercentstring);
-            //     $('.pinpoint').css("left", xpercentstring); 
-            // }
             
             $("#colors").change(function(){
                 let color = $("#colors").val();
                 $('.boundingbox').css("border", "solid " + color);
-                $('path').css("fill", color);
             });
-        
 
             function addInfo() {
-                let newSection = document.createElement("h4")
-                newSection.innerHTML = "Editor's Note: spem bonan"
-                let newInfo = document.createElement("text")
-                newInfo.innerHTML = "The literal translation of spem bonam is 'good hope'. Within the vernacular expressions of the Roman Army, however, spes, 'hope' referred specifically to 'hope of promotion'. Sometimes the titles of officers included among those performing technical roles (the immunes) would include the phrase ad spem (‘towards promotion’) to reflect that the individual was qualified for promotion. Officers in line to become centurions who had not achieved that rank before their term of service was completed would sometimes remain in the army in the role of retentus ad spem ('retained in hope of promotion')."
-                // newSection.after(newInfo)
-                $("#Spem\\ bonam\\ \\/\\ Iulio\\ Domnino\\ lib\\(rario\\)\\ \\/\\ et\\ Aurel\\(io\\)\\ Antiocho\\ \\/\\ et\\ Donnio\\ Pasia\\(nus\\?\\)\\ \\/\\ et\\ Septimio\\ Sigilliano\\ \\/\\ et\\ Aurelio\\ Magno\\ \\/\\ adiutoribus\\ \\/\\ leg\\(ionis\\)\\ IIII\\ Scy\\(thicae\\)").append(newSection)
-                $("#Spem\\ bonam\\ \\/\\ Iulio\\ Domnino\\ lib\\(rario\\)\\ \\/\\ et\\ Aurel\\(io\\)\\ Antiocho\\ \\/\\ et\\ Donnio\\ Pasia\\(nus\\?\\)\\ \\/\\ et\\ Septimio\\ Sigilliano\\ \\/\\ et\\ Aurelio\\ Magno\\ \\/\\ adiutoribus\\ \\/\\ leg\\(ionis\\)\\ IIII\\ Scy\\(thicae\\)").append(newInfo)
+                
             }
 
         </script>
