@@ -88,10 +88,10 @@
                         <option value="silver">Silver</option>
                         <option value="red" selected>Red</option>
                         <option value="black">Black</option>
-                    </select>
-
-                    <br>
-                    <div>
+                    </select>      
+                                  
+                    <div id="i">
+                        <br><br>
                         <!-- Loading in data from Flask and using Jinja to put the data onto the page-->
                         <h1>Inscriptions on this Object</h1> <br>
                         {%for entry in translations%}
@@ -110,10 +110,8 @@
                             <hr style="border-width:5px">    
                         {%endfor%}
                     </div>
-                    <br>
-                    <br>
-                    <br>
-                    <div>
+                    <div id="d">
+                        <br><br>
                         <h1>Depictions on this Object</h1> <br>
                         {%for entry in depictions%}
                             {% set title = page_titles[loop.index-1] %}
@@ -230,14 +228,20 @@
                 if (visibility == "inscriptions") {
                     $('.inscriptions').css("visibility", "visible")
                     $('.depictions').css("visibility", "hidden")
+                    $('#i').css("display", "block")
+                    $('#d').css("display", "none")
                 }
                 else if (visibility == "depictions") {
                     $('.inscriptions').css("visibility", "hidden")
                     $('.depictions').css("visibility", "visible")
+                    $('#i').css("display", "none")
+                    $('#d').css("display", "block")
                 }
                 else {
                     $('.inscriptions').css("visibility", "visible")
                     $('.depictions').css("visibility", "visible")
+                    $('#i').css("display", "block")
+                    $('#d').css("display", "block")
                 }
             });
 
