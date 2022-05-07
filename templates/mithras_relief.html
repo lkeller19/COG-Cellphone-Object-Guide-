@@ -51,12 +51,12 @@
                     <div class= "wrapper">
                             <img src={{image}} alt="object1" class="img-fluid">
                             {%for entry in depictions%}
-                                <a href="#{{loop.index-1}}depicts">
+                                <a onclick="highlight(event)" href="#{{loop.index-1}}depicts">
                                     <div class="boundingbox depictions" style="left: {{entry[1][0]}}%; top: {{entry[1][1]}}%; padding-right: {{entry[1][2]}}%; padding-bottom: {{entry[1][3]}}%;" id="{{loop.index-1}}depictspos"></div>
                                 </a>
                             {%endfor%}
                             {%for entry in translations%}
-                                <a href="#{{loop.index-1}}inscripts">
+                                <a onclick="highlight(event)" href="#{{loop.index-1}}inscripts">
                                     <div class="boundingbox inscriptions" style="left: {{entry[2][0]}}%; top: {{entry[2][1]}}%; padding-right: {{entry[2][2]}}%; padding-bottom: {{entry[2][3]}}%;" id="{{loop.index-1}}inscriptspos"></div>
                                 </a>
                             {%endfor%}
@@ -101,10 +101,10 @@
                                 <h4>Translation:</h4>
                                     <text>{{entry[1]}}</text>
                                     <br>
+                                <a onclick="highlight(event)" href="#{{loop.index-1}}inscriptspos"> 
+                                    <h4>Location on Image</h4> 
+                                </a>
                             </div>
-                            <a onclick="emphasize_border(event)" href="#{{loop.index-1}}inscriptspos"> 
-                                <h4>Location on Image</h4> 
-                            </a>
                             <hr style="border-width:5px">    
                         {%endfor%}
                     </div>
@@ -118,7 +118,7 @@
                             <div id="{{loop.index-1}}depicts">
                                 <h4>Depicts:</h4>
                                     <a href="{{entry[0]}}">{{title}}</a>
-                                <a onclick="emphasize_border(event)" href="#{{loop.index-1}}depictspos"> 
+                                <a onclick="highlight(event)" href="#{{loop.index-1}}depictspos"> 
                                     <h4>Location on Image</h4> 
                                 </a>
                             </div>
@@ -160,11 +160,23 @@
             </button> 
         </a>
         <script> 
-            var emphasized = null;
- 
-            function emphasize_border(event) {
+            var highlightedBox = null;
+            var highlightedDescript = null;
+            
+            function highlight(event) {
                 let anchor = event.target.closest("a");
                 let temp = anchor.getAttribute("href");
+                let tempBox = null;
+                let tempDescript = null;
+                if (temp.includes("pos")) {
+                    tempBox = temp;
+                    tempDescript = temp.slice(0, -3);
+                } else {
+                    tempBox = temp + "pos";
+                    tempDescript = temp;
+                }
+
+                
                 let color = null;
                 if (temp.includes("inscript")) {
                     color = $("#inscolors").val();
@@ -172,13 +184,16 @@
                     color = $("#depcolors").val();
                 }
                 
-                if (emphasized != null) {
-                    $(emphasized).css("border", "3px solid " + color);
+                if (highlightedBox != null) {
+                    $(highlightedBox).css("border", "3px solid " + color);
+                    $(highlightedDescript).css("border", "none");
                 }
-                
-                emphasized = temp;
-                $(emphasized).css("border", "5px dashed " + color);
-            }
+
+                highlightedBox = tempBox;
+                highlightedDescript = tempDescript
+                $(highlightedBox).css("border", "5px dashed " + color);
+                $(highlightedDescript).css("border", "5px dashed #000000");
+            }   
 
             document.addEventListener('DOMContentLoaded', function() {
                 const xval = (40.726 * 60321.7158176944) - 2456580;
