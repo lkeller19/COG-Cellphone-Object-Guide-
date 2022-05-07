@@ -52,11 +52,21 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    queries = load_queries("SPARQL-queries/latin-inscription-translations.rq", "SPARQL-queries/arsu-relief-translations.rq")
+    queries2 = load_queries("SPARQL-queries/gad-relief-translations.rq", "SPARQL-queries/julius-terentius-translations.rq")
+    queries3 = load_queries("SPARQL-queries/votive-relief-translations.rq", "SPARQL-queries/mithras-relief-translations.rq")
 
-@app.route("/scratch_object")
-def scratch():
-    return render_template('scratch_object.html')
+    data = query_wd(queries[0], queries[1])
+    data1 = query_wd(queries2[0], queries2[1])
+    data2 = query_wd(queries3[0], queries3[1])
+    images = []
+    images.append(data[0]["results"]["bindings"][0]["image"]["value"])
+    images.append(data[1]["results"]["bindings"][0]["image"]["value"])
+    images.append(data1[0]["results"]["bindings"][0]["image"]["value"])
+    images.append(data1[1]["results"]["bindings"][0]["image"]["value"])
+    images.append(data2[0]["results"]["bindings"][0]["image"]["value"])
+    images.append(data2[1]["results"]["bindings"][0]["image"]["value"])
+    return render_template('index.html', images=images)
 
 @app.route("/qr_code")
 def qr_code():

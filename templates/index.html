@@ -43,58 +43,64 @@
 
         <div class="vertical-center">
             <main class="container p-5">
-
                 <div class="wid">
-                    <p>COG (Cellphone Object Guide) is an easy to use interface which... </p>
-                    </div>
+                    <h1> Welcome to <span style="color: green">C</span><span style="color: blue">O</span><span style="color: red">G</span> (<span style="color: green">Cellphone</span> <span style="color: blue">Object</span> <span style="color: red">Guide</span>) </h1>
+                    <p>
+                        Primarily meant for mobile viewing within a museum from a scanned QR code unique to each object, COG aims to provide an effective, modern solution to the space constrains of a printed museum label.
+                        Working with the potential to expand/collapse sections with a single click and the ability of the viewer to press on the specific parts of images that interest them, large amounts of information can be presented in an economical manner.
+                        Specifically, COG provides detailed information about 6 objects from the ancient city Dura-Europos, 
+                        with an emphasis on providing accessible translations of the numerous inscriptions on the objects as well as the specifics of what each object depicts.
+                    </p>
+                    <p> Select an object below to explore! </p>
+                </div>
                     <div class="card-deck cardfontcolor mb-1 d-flex justify-content-center">
-                    <div class="card mx-5">
-                        <a href="/latin_inscription"><img src="/static/dura-fX2_01.png" class="card-img-top" alt="object1"></a>
-                        <div class="card-body">
-                        <h5 class="card-title">Latin Inscription from the Praetorium at Dura</h5>
-                        <a href="/latin_inscription" class="btn btn-primary stretched-link">Learn More</a>
-                        </div>
-                    </div>
-                    <div class="card mx-5">
-                        <a href="/arsu_relief"><img src="/static/dura-fX2_01.png" class="card-img-top" alt="object2"></a>
-                        <div class="card-body">
-                        <h5 class="card-title">Relief of Arsu</h5>
-                        <a href="/arsu_relief" class="btn btn-primary stretched-link">Learn More</a>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="card-deck cardfontcolor d-flex justify-content-center">
-                    <div class="card mx-5">
-                        <a href="/gad_relief"><img src="/static/dura-fX2_01.png" class="card-img-top" alt="object3"></a>
-                        <div class="card-body">
-                        <h5 class="card-title">Cult relief of the Gad (Fortune) of Dura, from the Temple of the Gadde</h5>
-                        <a href="/gad_relief" class="btn btn-primary stretched-link">Learn More</a>
-                        </div>
-                    </div>
-                    <div class="card mx-5">
-                        <a href="/julius_terentius"><img src="/static/dura-fX2_01.png" class="card-img-top" alt="object4"></a>
-                        <div class="card-body">
-                        <h5 class="card-title">Julius Terentius Performing a Sacrifice</h5>
-                        <a href="/julius_terentius" class="btn btn-primary stretched-link">Learn More</a>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="card-deck cardfontcolor d-flex justify-content-center">
                         <div class="card mx-5">
-                            <a href="/votive_relief"><img src="/static/dura-fX2_01.png" class="card-img-top" alt="object3"></a>
+                            <a href="/latin_inscription"><img src="{{images[0]}}" class="card-img-top" alt="object1"></a>
                             <div class="card-body">
-                            <h5 class="card-title">Votive Relief of the Goddess Nemesis</h5>
-                            <a href="/votive_relief" class="btn btn-primary stretched-link">Learn More</a>
+                            <h5 class="card-title">Latin Inscription from the Praetorium at Dura</h5>
+                            <a href="/latin_inscription" class="btn btn-primary stretched-link">Learn More</a>
                             </div>
                         </div>
                         <div class="card mx-5">
-                            <a href="/mithras_relief"><img src="/static/dura-fX2_01.png" class="card-img-top" alt="object4"></a>
+                            <a href="/arsu_relief"><img src="{{images[1]}}" class="card-img-top" alt="object2"></a>
                             <div class="card-body">
-                            <h5 class="card-title">Cult Relief of Mithras Slaying the Bull (Tauroctony)</h5>
-                            <a href="/mithras_relief" class="btn btn-primary stretched-link">Learn More</a>
+                                <h5 class="card-title">Relief of Arsu</h5>
+                                <a href="/arsu_relief" class="btn btn-primary stretched-link">Learn More</a>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-deck cardfontcolor d-flex justify-content-center">
+                        <div class="card mx-5">
+                            <a href="/gad_relief"><img src="{{images[2]}}" class="card-img-top" alt="object3"></a>
+                            <div class="card-body">
+                            <h5 class="card-title">Cult relief of the Gad (Fortune) of Dura, from the Temple of the Gadde</h5>
+                            <a href="/gad_relief" class="btn btn-primary stretched-link">Learn More</a>
+                            </div>
                         </div>
+                        <div class="card mx-5">
+                            <a href="/julius_terentius"><img src="{{images[3]}}" class="card-img-top" alt="object4"></a>
+                            <div class="card-body">
+                                <h5 class="card-title">Julius Terentius Performing a Sacrifice</h5>
+                                <a href="/julius_terentius" class="btn btn-primary stretched-link">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-deck cardfontcolor d-flex justify-content-center">
+                        <div class="card mx-5">
+                            <a href="/votive_relief"><img src="{{images[4]}}" class="card-img-top" alt="object5"></a>
+                            <div class="card-body">
+                                <h5 class="card-title">Votive Relief of the Goddess Nemesis</h5>
+                                <a href="/votive_relief" class="btn btn-primary stretched-link">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="card mx-5">
+                            <a href="/mithras_relief"><img src="{{images[5]}}" class="card-img-top" alt="object6"></a>
+                            <div class="card-body">
+                                <h5 class="card-title">Cult Relief of Mithras Slaying the Bull (Tauroctony)</h5>
+                                <a href="/mithras_relief" class="btn btn-primary stretched-link">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
                 <br>
                 <br>
                 <div class="border-top">
