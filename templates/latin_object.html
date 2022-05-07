@@ -26,7 +26,7 @@
     </head>
 
     <br><br><br>
-    <body class="background" onload="addInfo()">
+    <body class="background" onload="mod_text()">
         <nav class="navbar navbar-expand-md navbar-light border-bottom fixed-top scrolling-navbar background">
             <a class="navbar-brand" href="/"><img src="/static/cog.png" style="padding-left: 10%" height="55" alt="COG"></a>
             <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
@@ -46,7 +46,7 @@
 
                 <div class="wid">
                     <a href="#explanation">
-                        <h1> Latin Inscription </h1>
+                        <h1> Latin Inscription from the Praetorium at Dura</h1>
                     </a>
                     <div class= "wrapper">
                             <img src={{image}} alt="object1" class="img-fluid">  
@@ -97,10 +97,10 @@
                         {%for entry in translations%}
                             <div id="{{loop.index-1}}inscripts">
                                 <h4> Inscription:</h4>
-                                    <text>{{entry[0]}}</text>
+                                    <text id="{{loop.index-1}}inscriptstextl">{{entry[0]}}</text>
                                     <br>
                                 <h4>Translation:</h4>
-                                    <text>{{entry[1]}}</text>
+                                    <text id="{{loop.index-1}}inscriptstext">{{entry[1]}}</text>
                                     <br>
                                 <a onclick="highlight(event)" href="#{{loop.index-1}}inscriptspos"> 
                                     <h4>Location on Image</h4> 
@@ -127,10 +127,14 @@
                             <hr style="border-width:5px">
                         {%endfor%}
                     </div>
-
-                    <a id="explanation">
-                        <p> Explaination of what is going on </p>
-                    </a>
+                    <br><br>
+                    <div>
+                        <h4>Context of Discovery</h4>
+                        <a id="explanation">
+                            <p id="context">Michael Rostovtzeff records that this inscription was found in the corridor between rooms 8 and 9 of the Praetorium, with additional fragments found in each of these two rooms. He argues that since these fragments were found near the entrances of these rooms, however, the inscription was likely to have been entirely contained in the corridor originally. Comparison with the praetorium found at the legionary camp of Lambaesis, as well as the contents of this inscription, suggest that the rooms concerned formed the military archives at Dura-Europos. The inscription here and others from the praetorium refer to the various legions who made up the garrison at Dura-Europos; for example, the IV Scythica and the III Cyrenaica. The units of auxiliaries who were also stationed at Dura-Europos, the II Ulpia and the XX Palmyrenorum, are not mentioned in any inscriptions or graffiti from this building but are attested in the Temple of Azzanathkona located directly behind it. Rostovtzeff argues that this shows the temple had been the original headquarters of the garrison before the building of the praetorium and that the auxiliaries continued to deposit their records there even after its construction.</p>
+                        </a>
+                    </div>
+                    <h4>Location</h4>
                     <p>The Location Shown Below is Approximate, calculated from Map Coordinates and Projected onto a Satellite Image of Dura-Europos</p>
                     <div class= "wrapper" onLoad="loadfunc(40.727421, 34.750515)">
                         <img src="http://www.athenapub.com/aria1/_Syria/md_syria-dura-satellite.jpg" alt="map" class="img-fluid">
@@ -237,70 +241,62 @@
                 }
             });
 
-            function addInfo() {
-                let newSection = document.createElement("h4")
-                newSection.innerHTML = "Editor's Note: Impera[tori]"
-                let newInfo = document.createElement("text")
-                newInfo.innerHTML = "This is the dative form of Imperator, the Latin term for the Roman Emperor. Find out more at https://en.wikipedia.org/wiki/Imperator#Imperator_as_an_imperial_title"
-                $("#Impera\\[tori\\]\\/\\ Caesari\\ \\/\\ bona\\ fortuna\\ nobis\\ \\/\\ summo\\ summo\\ \\/\\ senatui\\ populoque\\ Romano").append(newSection)
-                $("#Impera\\[tori\\]\\/\\ Caesari\\ \\/\\ bona\\ fortuna\\ nobis\\ \\/\\ summo\\ summo\\ \\/\\ senatui\\ populoque\\ Romano").append(newInfo)
-                
-                let newSection2 = document.createElement("h4")
-                newSection2.innerHTML = "Editor's Note: Caesari"
-                let newInfo2 = document.createElement("text")
-                newInfo2.innerHTML = "This is the dative form of Caesar, a title given to the Roman Emperors, that was originally derived from the name of Julius Caesar and his immediate successors. Find out more at https://en.wikipedia.org/wiki/Caesar_(title)"
-                $("#Impera\\[tori\\]\\/\\ Caesari\\ \\/\\ bona\\ fortuna\\ nobis\\ \\/\\ summo\\ summo\\ \\/\\ senatui\\ populoque\\ Romano").append(newSection2)
-                $("#Impera\\[tori\\]\\/\\ Caesari\\ \\/\\ bona\\ fortuna\\ nobis\\ \\/\\ summo\\ summo\\ \\/\\ senatui\\ populoque\\ Romano").append(newInfo2)
-      
-                let newSection3 = document.createElement("h4")
-                newSection3.innerHTML = "Editor's Note: Summo Summo"
-                let newInfo3 = document.createElement("text")
-                newInfo3.innerHTML = "This text has been mostly erased and replaced with cross-lines."
-                $("#Impera\\[tori\\]\\/\\ Caesari\\ \\/\\ bona\\ fortuna\\ nobis\\ \\/\\ summo\\ summo\\ \\/\\ senatui\\ populoque\\ Romano").append(newSection3)
-                $("#Impera\\[tori\\]\\/\\ Caesari\\ \\/\\ bona\\ fortuna\\ nobis\\ \\/\\ summo\\ summo\\ \\/\\ senatui\\ populoque\\ Romano").append(newInfo3)
+            var last_note = "";
 
-                let newSection4 = document.createElement("h4")
-                newSection4.innerHTML = "Editor's Note: SPQR"
-                let newInfo4 = document.createElement("text")
-                newInfo4.innerHTML = "The abbreviation, expanded here, was very old by the time this inscription was written. It referred to the Roman government in the time of the Republic, before Emperors began to rule in Rome, but persisted throughout the Roman empire. Find out more at https://en.wikipedia.org/wiki/SPQR"
-                $("#Spem\\ bonam\\ \\/\\ Iulio\\ Domnino\\ lib\\(rario\\)\\ \\/\\ et\\ Aurel\\(io\\)\\ Antiocho\\ \\/\\ et\\ Donnio\\ Pasia\\(nus\\?\\)\\ \\/\\ et\\ Septimio\\ Sigilliano\\ \\/\\ et\\ Aurelio\\ Magno\\ \\/\\ adiutoribus\\ \\/\\ leg\\(ionis\\)\\ IIII\\ Scy\\(thicae\\)").append(newSection4)
-                $("#Spem\\ bonam\\ \\/\\ Iulio\\ Domnino\\ lib\\(rario\\)\\ \\/\\ et\\ Aurel\\(io\\)\\ Antiocho\\ \\/\\ et\\ Donnio\\ Pasia\\(nus\\?\\)\\ \\/\\ et\\ Septimio\\ Sigilliano\\ \\/\\ et\\ Aurelio\\ Magno\\ \\/\\ adiutoribus\\ \\/\\ leg\\(ionis\\)\\ IIII\\ Scy\\(thicae\\)").append(newInfo4)
-            
-                let newSection5 = document.createElement("h4")
-                newSection5.innerHTML = "Editor's Note: spem bonan"
-                let newInfo5 = document.createElement("text")
-                newInfo5.innerHTML = "The literal translation of spem bonam is 'good hope'. Within the vernacular expressions of the Roman Army, however, spes, 'hope' referred specifically to 'hope of promotion'. Sometimes the titles of officers included among those performing technical roles (the immunes) would include the phrase ad spem (‘towards promotion’) to reflect that the individual was qualified for promotion. Officers in line to become centurions who had not achieved that rank before their term of service was completed would sometimes remain in the army in the role of retentus ad spem ('retained in hope of promotion')."
-                $("#Spem\\ bonam\\ \\/\\ Iulio\\ Domnino\\ lib\\(rario\\)\\ \\/\\ et\\ Aurel\\(io\\)\\ Antiocho\\ \\/\\ et\\ Donnio\\ Pasia\\(nus\\?\\)\\ \\/\\ et\\ Septimio\\ Sigilliano\\ \\/\\ et\\ Aurelio\\ Magno\\ \\/\\ adiutoribus\\ \\/\\ leg\\(ionis\\)\\ IIII\\ Scy\\(thicae\\)").append(newSection5)
-                $("#Spem\\ bonam\\ \\/\\ Iulio\\ Domnino\\ lib\\(rario\\)\\ \\/\\ et\\ Aurel\\(io\\)\\ Antiocho\\ \\/\\ et\\ Donnio\\ Pasia\\(nus\\?\\)\\ \\/\\ et\\ Septimio\\ Sigilliano\\ \\/\\ et\\ Aurelio\\ Magno\\ \\/\\ adiutoribus\\ \\/\\ leg\\(ionis\\)\\ IIII\\ Scy\\(thicae\\)").append(newInfo5)
+            var note_array = [
+                "This is the dative form of Imperator, the Latin term for the Roman Emperor. Find out more on <a href=\"https://en.wikipedia.org/wiki/Imperator#Imperator_as_an_imperial_title\" target=\"_blank\">Wikipedia</a>",
+                "This is the dative form of Caesar, a title given to the Roman Emperors, that was originally derived from the name of Julius Caesar and his immediate successors. Find out more on <a href=\"https://en.wikipedia.org/wiki/Caesar_(title)\" target=\"_blank\">Wikipedia</a>",
+                "This text has been mostly erased and replaced with cross-lines.",
+                "The abbreviation, expanded here, was very old by the time this inscription was written. It referred to the Roman government in the time of the Republic, before Emperors began to rule in Rome, but persisted throughout the Roman empire. Find out more on <a href=\"https://en.wikipedia.org/wiki/SPQR\" target=\"_blank\">Wikipedia</a>",
+                "The literal translation of spem bonam is 'good hope'. Within the vernacular expressions of the Roman Army, however, spes, 'hope' referred specifically to 'hope of promotion'. Sometimes the titles of officers included among those performing technical roles (the immunes) would include the phrase ad spem (‘towards promotion’) to reflect that the individual was qualified for promotion. Officers in line to become centurions who had not achieved that rank before their term of service was completed would sometimes remain in the army in the role of retentus ad spem ('retained in hope of promotion').",
+                "The librarius within the Roman Army was a clerk or record keeper. The holder of this office ranked among the immunes, those in the army who were exempted from mundane tasks such as wall building. Many different types of skill would enable an ordinary legionary soldier to become an immunes; for instance, specialists in working copper or bronze might become an aerarius and a leather-worker might be designated as a shoemaker (sutores). The grant of immunitas did not involve any increase in salary but did hold some prospect of promotion. A librarius was attached to almost every office within the army, possibly even to each century. At Dura-Europos, the Latin Inscription from the Praetorium includes reference to several adiutores (deputies) working alongside the librarius, Julius Domininus. In this case, it seems likely that Domininus was assigned as librarius to the commander of the detachment of the Legio IV Scythica stationed at Dura-Europos and that his deputies served the centuries making up that detachment. As there are four deputies, it is possible to surmise that the detachment consisted of four centuries.",
+                "An adiutor was an administrative assistant in the Roman Army. The adiutores might be attached to any number of offices within the army and would be one of less senior roles. In the Latin Inscription from the Praetorium at Dura-Europos, the four adiutores named alongside the librarius, Julius Domininus, would seem to be his subordinates. The ‘hope of promotion’ mentioned in the inscription would therefore seem to indicate that these individuals hoped to succeed to the position of librarius in the future.",
+                "This refers to one of the legions from which the garrison at Dura-Europos was derived. Find out more on <a href=\"https://en.wikipedia.org/wiki/Legio_IV_Scythica\" target=\"_blank\">Wikipedia</a>",
+                "These Aramaic numerals were read by Professor Julian J. Obermann and reported by Rostovtzeff in his final report. This is a date in the Seleucid Era (a mode of dating that persisted in this region from the Seleucid Empire, which had been ruled by Hellenistic Greek kings) and in the modern system gives the year 222-3 CE."
+            ];
 
-                let newSection6 = document.createElement("h4")
-                newSection6.innerHTML = "Editor's Note: Librarius (Roman Army)"
-                let newInfo6 = document.createElement("text")
-                newInfo6.innerHTML = "The librarius within the Roman Army was a clerk or record keeper. The holder of this office ranked among the immunes, those in the army who were exempted from mundane tasks such as wall building. Many different types of skill would enable an ordinary legionary soldier to become an immunes; for instance, specialists in working copper or bronze might become an aerarius and a leather-worker might be designated as a shoemaker (sutores). The grant of immunitas did not involve any increase in salary but did hold some prospect of promotion. A librarius was attached to almost every office within the army, possibly even to each century. At Dura-Europos, the Latin Inscription from the Praetorium includes reference to several adiutores (deputies) working alongside the librarius, Julius Domininus. In this case, it seems likely that Domininus was assigned as librarius to the commander of the detachment of the Legio IV Scythica stationed at Dura-Europos and that his deputies served the centuries making up that detachment. As there are four deputies, it is possible to surmise that the detachment consisted of four centuries."
-                $("#Spem\\ bonam\\ \\/\\ Iulio\\ Domnino\\ lib\\(rario\\)\\ \\/\\ et\\ Aurel\\(io\\)\\ Antiocho\\ \\/\\ et\\ Donnio\\ Pasia\\(nus\\?\\)\\ \\/\\ et\\ Septimio\\ Sigilliano\\ \\/\\ et\\ Aurelio\\ Magno\\ \\/\\ adiutoribus\\ \\/\\ leg\\(ionis\\)\\ IIII\\ Scy\\(thicae\\)").append(newSection6)
-                $("#Spem\\ bonam\\ \\/\\ Iulio\\ Domnino\\ lib\\(rario\\)\\ \\/\\ et\\ Aurel\\(io\\)\\ Antiocho\\ \\/\\ et\\ Donnio\\ Pasia\\(nus\\?\\)\\ \\/\\ et\\ Septimio\\ Sigilliano\\ \\/\\ et\\ Aurelio\\ Magno\\ \\/\\ adiutoribus\\ \\/\\ leg\\(ionis\\)\\ IIII\\ Scy\\(thicae\\)").append(newInfo6)
-            
-                let newSection7 = document.createElement("h4")
-                newSection7.innerHTML = "Editor's Note: Adiutor (Roman Army)"
-                let newInfo7 = document.createElement("text")
-                newInfo7.innerHTML = "An adiutor was an administrative assistant in the Roman Army. The adiutores might be attached to any number of offices within the army and would be one of less senior roles. In the Latin Inscription from the Praetorium at Dura-Europos, the four adiutores named alongside the librarius, Julius Domininus, would seem to be his subordinates. The ‘hope of promotion’ mentioned in the inscription would therefore seem to indicate that these individuals hoped to succeed to the position of librarius in the future."
-                $("#Spem\\ bonam\\ \\/\\ Iulio\\ Domnino\\ lib\\(rario\\)\\ \\/\\ et\\ Aurel\\(io\\)\\ Antiocho\\ \\/\\ et\\ Donnio\\ Pasia\\(nus\\?\\)\\ \\/\\ et\\ Septimio\\ Sigilliano\\ \\/\\ et\\ Aurelio\\ Magno\\ \\/\\ adiutoribus\\ \\/\\ leg\\(ionis\\)\\ IIII\\ Scy\\(thicae\\)").append(newSection7)
-                $("#Spem\\ bonam\\ \\/\\ Iulio\\ Domnino\\ lib\\(rario\\)\\ \\/\\ et\\ Aurel\\(io\\)\\ Antiocho\\ \\/\\ et\\ Donnio\\ Pasia\\(nus\\?\\)\\ \\/\\ et\\ Septimio\\ Sigilliano\\ \\/\\ et\\ Aurelio\\ Magno\\ \\/\\ adiutoribus\\ \\/\\ leg\\(ionis\\)\\ IIII\\ Scy\\(thicae\\)").append(newInfo7)
-            
-                let newSection8 = document.createElement("h4")
-                newSection8.innerHTML = "Editor's Note: Legio IIII Scythica"
-                let newInfo8 = document.createElement("text")
-                newInfo8.innerHTML = "This refers to one of the legions from which the garrison at Dura-Europos was derived. Find out more at https://en.wikipedia.org/wiki/Legio_IV_Scythica"
-                $("#Spem\\ bonam\\ \\/\\ Iulio\\ Domnino\\ lib\\(rario\\)\\ \\/\\ et\\ Aurel\\(io\\)\\ Antiocho\\ \\/\\ et\\ Donnio\\ Pasia\\(nus\\?\\)\\ \\/\\ et\\ Septimio\\ Sigilliano\\ \\/\\ et\\ Aurelio\\ Magno\\ \\/\\ adiutoribus\\ \\/\\ leg\\(ionis\\)\\ IIII\\ Scy\\(thicae\\)").append(newSection8)
-                $("#Spem\\ bonam\\ \\/\\ Iulio\\ Domnino\\ lib\\(rario\\)\\ \\/\\ et\\ Aurel\\(io\\)\\ Antiocho\\ \\/\\ et\\ Donnio\\ Pasia\\(nus\\?\\)\\ \\/\\ et\\ Septimio\\ Sigilliano\\ \\/\\ et\\ Aurelio\\ Magno\\ \\/\\ adiutoribus\\ \\/\\ leg\\(ionis\\)\\ IIII\\ Scy\\(thicae\\)").append(newInfo8)
-            
-                let newSection9 = document.createElement("h4")
-                newSection9.innerHTML = "Editor's Note: 534"
-                let newInfo9 = document.createElement("text")
-                newInfo9.innerHTML = "These Aramaic numerals were read by Professor Julian J. Obermann and reported by Rostovtzeff in his final report. This is a date in the Seleucid Era (a mode of dating that persisted in this region from the Seleucid Empire, which had been ruled by Hellenistic Greek kings) and in the modern system gives the year 222-3 CE."
-                $("#\\35 34").append(newSection9)
-                $("#\\35 34").append(newInfo9)
+            function mod_text() {
+                let modified_text = $("#0inscriptstextl").html();
+                modified_text = modified_text.replace("Impera\[tori\]", "<a href=\"javascript:editors_note('#0inscriptstext', 'Impera[tori]', 0)\"><span>Impera[tori]</span></a>");
+                modified_text = modified_text.replace("Caesari", "<a href=\"javascript:editors_note('#0inscriptstext', 'Caesari', 1)\"><span>Caesari</span></a>");
+                modified_text = modified_text.replace("summo summo", "<a href=\"javascript:editors_note('#0inscriptstext', 'Summo Summo', 2)\"><span>summo summo</span></a>");
+                $("#0inscriptstextl").html(modified_text);
 
+                modified_text = $("#5inscriptstextl").html();
+                modified_text = modified_text.replace("S(enatus) P(opulus)Q(ue) [R(omanus)]", "<a href=\"javascript:editors_note('#5inscriptstext', 'SPQR', 3)\"><span>S(enatus) P(opulus)Q(ue) [R(omanus)]</span></a>");
+                $("#5inscriptstextl").html(modified_text);
+
+                modified_text = $("#2inscriptstextl").html();
+                modified_text = modified_text.replace("Spem bonam", "<a href=\"javascript:editors_note('#2inscriptstext', 'Spem Bonam', 4)\"><span>Spem bonam</span></a>");
+                modified_text = modified_text.replace("lib(rario)", "<a href=\"javascript:editors_note('#2inscriptstext', 'Librarius (Roman Army)', 5)\"><span>lib(rario)</span></a>");
+                modified_text = modified_text.replace("adiutoribus", "<a href=\"javascript:editors_note('#2inscriptstext', 'Adiutor (Roman Army)', 6)\"><span>adiutoribus</span></a>");
+                modified_text = modified_text.replace("leg(ionis) IIII Scy(thicae)", "<a href=\"javascript:editors_note('#2inscriptstext', 'Legio III Scythica', 7)\"><span>leg(ionis) IIII Scy(thicae)</span></a>");
+                $("#2inscriptstextl").html(modified_text);
+
+                modified_text = $("#1inscriptstextl").html();
+                modified_text = modified_text.replace("534", "<a href=\"javascript:editors_note('#1inscriptstext', '534', 8)\"><span>534</span></a>");
+                $("#1inscriptstextl").html(modified_text);
+            }
+
+
+            function editors_note(id, name, num) {
+                if (last_note == name) {
+                    $("#ed1").remove();
+                    $("#ed2").remove();
+                    last_note = "";
+                } else {
+                    $("#ed1").remove();
+                    $("#ed2").remove();
+                    let newSection = document.createElement("h4");
+                    newSection.setAttribute("id","ed1");
+                    newSection.innerHTML = "Editor's Note: " + name;
+                    let newInfo = document.createElement("text");
+                    newInfo.setAttribute("id", "ed2");
+                    newInfo.innerHTML = note_array[num];
+                    $(id).append(newSection);
+                    $(id).append(newInfo);
+                    last_note = name;
+                } 
             }
 
         </script>

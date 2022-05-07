@@ -26,7 +26,7 @@
     </head>
 
     <br><br><br>
-    <body class="background" onload="addInfo()">
+    <body class="background" onload="mod_text()">
         <nav class="navbar navbar-expand-md navbar-light border-bottom fixed-top scrolling-navbar background">
             <a class="navbar-brand" href="/"><img src="/static/cog.png" style="padding-left: 10%" height="55" alt="COG"></a>
             <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
@@ -46,7 +46,7 @@
 
                 <div class="wid">
                     <a href="#explanation">
-                        <h1> Cult relief of the Gad (Fortune) of Dura, from the Temple of the Gadde </h1>
+                        <h1> Cult Relief of the Gad (Fortune) of Dura, from the Temple of the Gadde </h1>
                     </a>
                     <div class= "wrapper">
                             <img src={{image}} alt="object1" class="img-fluid">
@@ -96,10 +96,10 @@
                         {%for entry in translations%}
                             <div id="{{loop.index-1}}inscripts">
                                 <h4> Inscription:</h4>
-                                    <text>{{entry[0]}}</text>
+                                    <text id="{{loop.index-1}}inscriptstextl">{{entry[0]}}</text>
                                     <br>
                                 <h4>Translation:</h4>
-                                    <text>{{entry[1]}}</text>
+                                    <text id="{{loop.index-1}}inscriptstext">{{entry[1]}}</text>
                                     <br>
                                 <a onclick="highlight(event)" href="#{{loop.index-1}}inscriptspos"> 
                                     <h4>Location on Image</h4> 
@@ -125,10 +125,14 @@
                             <hr style="border-width:5px">
                         {%endfor%}
                     </div>
-
-                    <a id="explanation">
-                        <p> Explaination of what is going on </p>
-                    </a>
+                    <br><br>
+                    <div>
+                        <h4>Context of Discovery</h4>
+                        <a id="explanation">
+                            <p id="context">The Cult Relief of Gad was discovered alongside the other relief dedicated by Hairan beneath the debris of the upper walls and ceiling in <i>naos</i> 3 of the Temple of Gadde. This structure was excavated in section H, block 1 by the Yale-French team during their 7th and 8th seasons between 1933 and 1935. The reliefs were found broken, with the cult relief of Gad being in 32 pieces. A third relief was also partially recovered from this context, with 9 pieces extracted from the rubble. C. C. Torrey speculates that this last relief may have been more intact that the others and therefore removed by earlier looters at the site. It is likely to have depicted either Iarhibol or Malakbel, other Palmyrene gods. All three seem to have been made in a similar style, implying that the three originally went together, occupying the niches in the back wall of the <i>naos</i>. </p>
+                        </a>
+                    </div>
+                    <h4>Location</h4>
                     <p>The Location Shown Below is Approximate, calculated from Map Coordinates and Projected onto a Satellite Image of Dura-Europos</p>
                     <div class= "wrapper" onLoad="loadfunc(40.727421, 34.750515)">
                         <img src="http://www.athenapub.com/aria1/_Syria/md_syria-dura-satellite.jpg" alt="map" class="img-fluid">
@@ -235,48 +239,52 @@
                 }
             });
 
-            function addInfo() {
-                let newSection = document.createElement("h4")
-                newSection.innerHTML = "Editor's Note: Gad of Dura"
-                let newInfo = document.createElement("text")
-                newInfo.innerHTML = "Gad is an Aramaic deity equivalent to the Greek Tyche (Fortune), who often acts as a titulary deity and protector of named cities. Here Gad is represented as Zeus Olympias - bearded, carrying a sceptre, and enthroned between two eagles. This is in stark contrast to the companion relief of this inscription, which shows the Gad of Tadmor (the indigenous name for Palmyra) as a goddess, following the type of a famous relief of the Tyche of Antioch. This inscription is especially significant for being the earliest dated attestation that the indigenous name of the city was Dura."
-                $("#גדא\\ די\\ דוא\\ עבד\\ חירנ\\ \\/\\ בר\\ מלכו\\ בר\\ נצור\\ בירח\\ ניסנ\\ \\/\\ שנת\\ 470").append(newSection)
-                $("#גדא\\ די\\ דוא\\ עבד\\ חירנ\\ \\/\\ בר\\ מלכו\\ בר\\ נצור\\ בירח\\ ניסנ\\ \\/\\ שנת\\ 470").append(newInfo)
+            var last_note = "";
 
-                let newSection2 = document.createElement("h4")
-                newSection2.innerHTML = "Editor's Note: Hairan Son of Maliku"
-                let newInfo2 = document.createElement("text")
-                newInfo2.innerHTML = "Hairan son of Maliku was a member of the Palmyrene aristocracy associated with Dura-Europos in the 2nd century CE. Scholars have suggested that he may be an ancestor of the husband of Queen Zenobia, the Palmyrene ruler who rebelled against the Roman empire in the 3rd century CE. He is known from two relief inscriptions at Dura-Europos, one dedicated to the Gad of Dura and the other to the Tyche of Palmyra. The sanctuary in which these two dedications were made, the Temple of the Gadde, seems to have enjoyed significant financing from Hairan’s family. Ann Perkins observes that the subtle differences in the sculpting of the two pieces indicates that two different craftsmen worked on them. The two are still similar in style, however, and given their close dating (both from 159 CE), the likelihood is that Hairan employed two sculptors from the same workshop simultaneously in order to make a double dedication."
-                $("#גדא\\ די\\ דוא\\ עבד\\ חירנ\\ \\/\\ בר\\ מלכו\\ בר\\ נצור\\ בירח\\ ניסנ\\ \\/\\ שנת\\ 470").append(newSection2)
-                $("#גדא\\ די\\ דוא\\ עבד\\ חירנ\\ \\/\\ בר\\ מלכו\\ בר\\ נצור\\ בירח\\ ניסנ\\ \\/\\ שנת\\ 470").append(newInfo2)
+            var note_array = [
+                "Gad is an Aramaic deity equivalent to the Greek Tyche (Fortune), who often acts as a titulary deity and protector of named cities. Here Gad is represented as Zeus Olympias - bearded, carrying a sceptre, and enthroned between two eagles. This is in stark contrast to the companion relief of this inscription, which shows the Gad of Tadmor (the indigenous name for Palmyra) as a goddess, following the type of a famous relief of the Tyche of Antioch. This inscription is especially significant for being the earliest dated attestation that the indigenous name of the city was Dura.",
+                "Hairan son of Maliku was a member of the Palmyrene aristocracy associated with Dura-Europos in the 2nd century CE. Scholars have suggested that he may be an ancestor of the husband of Queen Zenobia, the Palmyrene ruler who rebelled against the Roman empire in the 3rd century CE. He is known from two relief inscriptions at Dura-Europos, one dedicated to the Gad of Dura and the other to the Tyche of Palmyra. The sanctuary in which these two dedications were made, the Temple of the Gadde, seems to have enjoyed significant financing from Hairan’s family. Ann Perkins observes that the subtle differences in the sculpting of the two pieces indicates that two different craftsmen worked on them. The two are still similar in style, however, and given their close dating (both from 159 CE), the likelihood is that Hairan employed two sculptors from the same workshop simultaneously in order to make a double dedication.",
+                "Nisan is a month in the Hebrew calendars, corresponding roughly to April. Although Palmyrene inscriptions from Dura-Europos use the Seleucid Era for dating the years, their practice seems to have been to use the Hebrew calendar for the months. Find out more on <a href=\"https://en.wikipedia.org/wiki/Nisan\" target=\"_blank\">Wikipedia</a>",
+                "The year 470 refers to a date in the Seleucid Era, a system of dating instituted by the dynasty of Hellenistic kings created by Seleucus I Nicator. Despite the collapse of the Seleucids and the take over of the region containing Dura-Europos by the Parthian empire, local populations continued to use the same dating system - as we can see here - right through into the Roman era.",
+                "Hellenistic King and founder of the Seleucid Empire. Legendary founder of Dura-Europos. Find out more on <a href=\"https://en.wikipedia.org/wiki/Seleucus_I_Nicator\" target=\"_blank\">Wikipedia</a>",
+                "Hairan son of Maliku was a member of the Palmyrene aristocracy associated with Dura-Europos in the 2nd century CE. Scholars have suggested that he may be an ancestor of the husband of Queen Zenobia, the Palmyrene ruler who rebelled against the Roman empire in the 3rd century CE. He is known from two relief inscriptions at Dura-Europos, one dedicated to the Gad of Dura and the other to the Tyche of Palmyra. The sanctuary in which these two dedications were made, the Temple of the Gadde, seems to have enjoyed significant financing from Hairan’s family. Ann Perkins observes that the subtle differences in the sculpting of the two pieces indicates that two different craftsmen worked on them. The two are still similar in style, however, and given their close dating (both from 159 CE), the likelihood is that Hairan employed two sculptors from the same workshop simultaneously in order to make a double dedication."
+            ];
 
-                let newSection3 = document.createElement("h4")
-                newSection3.innerHTML = "Editor's Note: Month Nisan"
-                let newInfo3 = document.createElement("text")
-                newInfo3.innerHTML = "Nisan is a month in the Hebrew calendars, corresponding roughly to April. Although Palmyrene inscriptions from Dura-Europos use the Seleucid Era for dating the years, their practice seems to have been to use the Hebrew calendar for the months. Find out more at https://en.wikipedia.org/wiki/Nisan"
-                $("#גדא\\ די\\ דוא\\ עבד\\ חירנ\\ \\/\\ בר\\ מלכו\\ בר\\ נצור\\ בירח\\ ניסנ\\ \\/\\ שנת\\ 470").append(newSection3)
-                $("#גדא\\ די\\ דוא\\ עבד\\ חירנ\\ \\/\\ בר\\ מלכו\\ בר\\ נצור\\ בירח\\ ניסנ\\ \\/\\ שנת\\ 470").append(newInfo3)
+            function mod_text() {
+                let modified_text = $("#1inscriptstext").html();
+                modified_text = modified_text.replace("Gad of Dura", "<a href=\"javascript:editors_note('#1inscriptstext', 'Gad of Dura', 0)\"><span>Gad of Dura</span></a>");
+                modified_text = modified_text.replace("Hairan", "<a href=\"javascript:editors_note('#1inscriptstext', 'Hairan son of Maliku', 1)\"><span>Hairan</span></a>");
+                modified_text = modified_text.replace("month Nisan", "<a href=\"javascript:editors_note('#1inscriptstext', 'Month Nisan', 2)\"><span>month Nisan</span></a>");
+                modified_text = modified_text.replace("year 470", "<a href=\"javascript:editors_note('#1inscriptstext', 'Year 470', 3)\"><span>year 470</span></a>");
+                $("#1inscriptstext").html(modified_text);
 
-                let newSection4 = document.createElement("h4")
-                newSection4.innerHTML = "Editor's Note: Year 470"
-                let newInfo4 = document.createElement("text")
-                newInfo4.innerHTML = "The year 470 refers to a date in the Seleucid Era, a system of dating instituted by the dynasty of Hellenistic kings created by Seleucus I Nicator. Despite the collapse of the Seleucids and the take over of the region containing Dura-Europos by the Parthian empire, local populations continued to use the same dating system - as we can see here - right through into the Roman era."
-                $("#גדא\\ די\\ דוא\\ עבד\\ חירנ\\ \\/\\ בר\\ מלכו\\ בר\\ נצור\\ בירח\\ ניסנ\\ \\/\\ שנת\\ 470").append(newSection4)
-                $("#גדא\\ די\\ דוא\\ עבד\\ חירנ\\ \\/\\ בר\\ מלכו\\ בר\\ נצור\\ בירח\\ ניסנ\\ \\/\\ שנת\\ 470").append(newInfo4)
+                modified_text = $("#2inscriptstext").html();
+                modified_text = modified_text.replace("Seleukos Nikator", "<a href=\"javascript:editors_note('#2inscriptstext', 'Seleukos Nikator', 4)\"><span>Seleukos Nikator</span></a>");
+                $("#2inscriptstext").html(modified_text);
 
-                let newSection5 = document.createElement("h4")
-                newSection5.innerHTML = "Editor's Note: Seleukos Nikator"
-                let newInfo5 = document.createElement("text")
-                newInfo5.innerHTML = "Hellenistic King and founder of the Seleucid Empire. Legendary founder of Dura-Europos. Find out more at https://en.wikipedia.org/wiki/Seleucus_I_Nicator "
-                $("#סלוקוס\\ \\/\\ ניקטור").append(newSection5)
-                $("#סלוקוס\\ \\/\\ ניקטור").append(newInfo5)
+                modified_text = $("#3inscriptstext").html();
+                modified_text = modified_text.replace("Hairan", "<a href=\"javascript:editors_note('#3inscriptstext', 'Hairan son of Maliku ', 5)\"><span>Hairan</span></a>");
+                $("#3inscriptstext").html(modified_text);
+            }
 
-                let newSection6 = document.createElement("h4")
-                newSection6.innerHTML = "Editor's Note: Hairan son of Maliku"
-                let newInfo6 = document.createElement("text")
-                newInfo6.innerHTML = "Hairan son of Maliku was a member of the Palmyrene aristocracy associated with Dura-Europos in the 2nd century CE. Scholars have suggested that he may be an ancestor of the husband of Queen Zenobia, the Palmyrene ruler who rebelled against the Roman empire in the 3rd century CE. He is known from two relief inscriptions at Dura-Europos, one dedicated to the Gad of Dura and the other to the Tyche of Palmyra. The sanctuary in which these two dedications were made, the Temple of the Gadde, seems to have enjoyed significant financing from Hairan’s family. Ann Perkins observes that the subtle differences in the sculpting of the two pieces indicates that two different craftsmen worked on them. The two are still similar in style, however, and given their close dating (both from 159 CE), the likelihood is that Hairan employed two sculptors from the same workshop simultaneously in order to make a double dedication."
-                $("#צלמ\\ חירנ\\ בר\\ \\/\\ מלכו\\ בר\\ נצור").append(newSection6)
-                $("#צלמ\\ חירנ\\ בר\\ \\/\\ מלכו\\ בר\\ נצור").append(newInfo6)
+            function editors_note(id, name, num) {
+                if (last_note == name) {
+                    $("#ed1").remove();
+                    $("#ed2").remove();
+                    last_note = "";
+                } else {
+                    $("#ed1").remove();
+                    $("#ed2").remove();
+                    let newSection = document.createElement("h4");
+                    newSection.setAttribute("id","ed1");
+                    newSection.innerHTML = "Editor's Note: " + name;
+                    let newInfo = document.createElement("text");
+                    newInfo.setAttribute("id", "ed2");
+                    newInfo.innerHTML = note_array[num];
+                    $(id).append(newSection);
+                    $(id).append(newInfo);
+                    last_note = name;
+                } 
             }
 
         </script>

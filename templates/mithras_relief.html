@@ -26,7 +26,7 @@
     </head>
 
     <br><br><br>
-    <body class="background" onload="addInfo()">
+    <body class="background" onload="mod_text()">
         <nav class="navbar navbar-expand-md navbar-light border-bottom fixed-top scrolling-navbar background">
             <a class="navbar-brand" href="/"><img src="/static/cog.png" style="padding-left: 10%" height="55" alt="COG"></a>
             <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
@@ -96,10 +96,10 @@
                         {%for entry in translations%}
                             <div id="{{loop.index-1}}inscripts">
                                 <h4> Inscription:</h4>
-                                    <text>{{entry[0]}}</text>
+                                    <text id="{{loop.index-1}}inscriptstextl">{{entry[0]}}</text>
                                     <br>
                                 <h4>Translation:</h4>
-                                    <text>{{entry[1]}}</text>
+                                    <text id="{{loop.index-1}}inscriptstext">{{entry[1]}}</text>
                                     <br>
                                 <a onclick="highlight(event)" href="#{{loop.index-1}}inscriptspos"> 
                                     <h4>Location on Image</h4> 
@@ -125,10 +125,14 @@
                             <hr style="border-width:5px">
                         {%endfor%}
                     </div>
-
-                    <a id="explanation">
-                        <p> Explaination of what is going on </p>
-                    </a>
+                    <br><br>
+                    <div>
+                        <h4>Context of Discovery</h4>
+                        <a id="explanation">
+                            <p id="context">The Mithraeum, along with the two cult reliefs (of which this represents the smaller), was discovered in February 1934. It was excavated primarily by Comte du Menil du Buisson, with Professor Franz Cumont and Professor Michael Rostovtzeff, unusually, also being present. The reliefs were removed from the site and transported to New Haven soon after discovery in order to protect them from the elements. Both reliefs were originally situated in the Western wall of the Mithraeum behind the altar. The discovery of coloured gesso in the earliest layers of the Mithraeum structure which matched that found on the reliefs demonstrates that they were a feature of the structure at its inception.</p>
+                        </a>
+                    </div>
+                    <h4>Location</h4>
                     <p>The Location Shown Below is Approximate, calculated from Map Coordinates and Projected onto a Satellite Image of Dura-Europos</p>
                     <div class= "wrapper" onLoad="loadfunc(40.727421, 34.750515)">
                         <img src="http://www.athenapub.com/aria1/_Syria/md_syria-dura-satellite.jpg" alt="map" class="img-fluid">
@@ -235,57 +239,53 @@
                 }
             });
 
-            function addInfo() {
-                let newSection = document.createElement("h4")
-                newSection.innerHTML = "Editor's Note: Atpeni"
-                let newInfo = document.createElement("text")
-                newInfo.innerHTML = "Atpeni is an Aramaic personal name, meaning ‘Athe has turned’, referring to the goddess Athe. The name is also attested in a number of inscriptions in Palmyra."
-                $("#דכרנ\\ טב\\ אבד\\ אתפני\\ אסט\\[טג\\]א\\ \\/\\ בר\\ זבדעה\\ די\\ על\\ קשטא\\ די\\ בדורא\\ \\/\\ בירח\\ אדר\\ שמת\\ 4\\ 100\\ 80").append(newSection)
-                $("#דכרנ\\ טב\\ אבד\\ אתפני\\ אסט\\[טג\\]א\\ \\/\\ בר\\ זבדעה\\ די\\ על\\ קשטא\\ די\\ בדורא\\ \\/\\ בירח\\ אדר\\ שמת\\ 4\\ 100\\ 80").append(newInfo)
+            var last_note = "";
 
-                let newSection2 = document.createElement("h4")
-                newSection2.innerHTML = "Editor's Note: Strategos"
-                let newInfo2 = document.createElement("text")
-                newInfo2.innerHTML = "Strategos, originally a Greek title meaning ‘commander’, could refer to several different roles in Dura-Europos in this period. First, it could be a civic position, referring to the most senior magistrate in charge of administrating the city on a daily basis. The role in this case would be a remnant of the Hellenistic administrative structure of the city, meaning that this inscription would add to the evidence that this remained in use right through the Parthian period and into the early Roman era. On the other hand, however, the term was also used for military officials in command of a local force in the area of Dura-Europos, especially of regions falling under the jurisdiction of the Roman administration at Palmyra. The mention of the company of archers in this inscription makes it more likely that Atpeni is a strategos in the military sense."
-                $("#דכרנ\\ טב\\ אבד\\ אתפני\\ אסט\\[טג\\]א\\ \\/\\ בר\\ זבדעה\\ די\\ על\\ קשטא\\ די\\ בדורא\\ \\/\\ בירח\\ אדר\\ שמת\\ 4\\ 100\\ 80").append(newSection2)
-                $("#דכרנ\\ טב\\ אבד\\ אתפני\\ אסט\\[טג\\]א\\ \\/\\ בר\\ זבדעה\\ די\\ על\\ קשטא\\ די\\ בדורא\\ \\/\\ בירח\\ אדר\\ שמת\\ 4\\ 100\\ 80").append(newInfo2)
+            var note_array = ["Atpeni is an Aramaic personal name, meaning ‘Athe has turned’, referring to the goddess Athe. The name is also attested in a number of inscriptions in Palmyra.",
+            "Strategos, originally a Greek title meaning ‘commander’, could refer to several different roles in Dura-Europos in this period. First, it could be a civic position, referring to the most senior magistrate in charge of administrating the city on a daily basis. The role in this case would be a remnant of the Hellenistic administrative structure of the city, meaning that this inscription would add to the evidence that this remained in use right through the Parthian period and into the early Roman era. On the other hand, however, the term was also used for military officials in command of a local force in the area of Dura-Europos, especially of regions falling under the jurisdiction of the Roman administration at Palmyra. The mention of the company of archers in this inscription makes it more likely that Atpeni is a strategos in the military sense.",
+            "Zabdea is an Aramaic personal name, meaning ‘gift of Athe’ - a reference to the goddess Athe. This is the only occurrence of the name in Palmyrene inscriptions at Dura-Europos, but the Greek version of the name is very common, as is the Latin transcription, Zabdaathes, in the Dura military papyri. In combination with the name Atpeni, however, it seems highly likely that this individual had Palmyrene origins.",
+            "The archers referred to here were from Palmyra and are attested in a number of other inscriptions from the city of Dura-Europos, such as a relief dedicated to the Palmyrene deity Iarhibol in the temple of the Gadde. This inscription is the earliest datable reference to them, however, and places them in the city not long after the Roman army apparently annexed the area. They later became a formal cohort within the Roman army, designated as the cohors XX Palmyrenorum sagittariorum equitata milliaria.",
+            "Adar is a month in the Hebrew calendar, corresponding roughly to March. Although Palmyrene inscriptions from Dura-Europos use the Seleucid Era for the years, they use the Hebrew calendar for the months. Find out more about Adar at https://en.wikipedia.org/wiki/Adar",
+            "The year 480 refers to a date in the Seleucid Era, a system of dating instituted by the dynasty of Hellenistic kings created by Seleucus I Nicator. Despite the collapse of the Seleucids and the take over of the region containing Dura-Europos by the Parthian empire, local populations continued to use the same dating system - as we can see here - right through into the Roman era.",
+            "A Greek rendering, apparently, of the Aramaic name Atpeni. Michael Rostovtzeff, one of the original excavators of Dura-Europos, accordingly restored Ath- instead of Eth- at the beginning of the name in his first edition of the inscription."
+            ];
 
-                let newSection3 = document.createElement("h4")
-                newSection3.innerHTML = "Editor's Note: Zabdea"
-                let newInfo3 = document.createElement("text")
-                newInfo3.innerHTML = "Zabdea is an Aramaic personal name, meaning ‘gift of Athe’ - a reference to the goddess Athe. This is the only occurrence of the name in Palmyrene inscriptions at Dura-Europos, but the Greek version of the name is very common, as is the Latin transcription, Zabdaathes, in the Dura military papyri. In combination with the name Atpeni, however, it seems highly likely that this individual had Palmyrene origins."
-                $("#דכרנ\\ טב\\ אבד\\ אתפני\\ אסט\\[טג\\]א\\ \\/\\ בר\\ זבדעה\\ די\\ על\\ קשטא\\ די\\ בדורא\\ \\/\\ בירח\\ אדר\\ שמת\\ 4\\ 100\\ 80").append(newSection3)
-                $("#דכרנ\\ טב\\ אבד\\ אתפני\\ אסט\\[טג\\]א\\ \\/\\ בר\\ זבדעה\\ די\\ על\\ קשטא\\ די\\ בדורא\\ \\/\\ בירח\\ אדר\\ שמת\\ 4\\ 100\\ 80").append(newInfo3)
+            function mod_text() {
+                let modified_text = $("#0inscriptstext").html();
+                modified_text = modified_text.replace("Atpeni", "<a href=\"javascript:editors_note('#0inscriptstext', 'Atpeni', 0)\"><span>Atpeni</span></a>");
+                modified_text = modified_text.replace("strategos", "<a href=\"javascript:editors_note('#0inscriptstext', 'Strategos', 1)\"><span>strategos</span></a>");
+                modified_text = modified_text.replace("Zabdea", "<a href=\"javascript:editors_note('#0inscriptstext', 'Zabdea', 2)\"><span>Zabdea</span></a>");
+                modified_text = modified_text.replace("the archers", "<a href=\"javascript:editors_note('#0inscriptstext', 'The Archers', 3)\"><span>the archers</span></a>");
+                modified_text = modified_text.replace("month Adar", "<a href=\"javascript:editors_note('#0inscriptstext', 'Month Adar', 4)\"><span>month Adar</span></a>");
+                modified_text = modified_text.replace("year 480", "<a href=\"javascript:editors_note('#0inscriptstext', 'Year 480', 5)\"><span>year 480</span></a>");
+                $("#0inscriptstext").html(modified_text);
 
-                let newSection4 = document.createElement("h4")
-                newSection4.innerHTML = "Editor's Note: The Archers"
-                let newInfo4 = document.createElement("text")
-                newInfo4.innerHTML = "The archers referred to here were from Palmyra and are attested in a number of other inscriptions from the city of Dura-Europos, such as a relief dedicated to the Palmyrene deity Iarhibol in the temple of the Gadde. This inscription is the earliest datable reference to them, however, and places them in the city not long after the Roman army apparently annexed the area. They later became a formal cohort within the Roman army, designated as the cohors XX Palmyrenorum sagittariorum equitata milliaria."
-                $("#דכרנ\\ טב\\ אבד\\ אתפני\\ אסט\\[טג\\]א\\ \\/\\ בר\\ זבדעה\\ די\\ על\\ קשטא\\ די\\ בדורא\\ \\/\\ בירח\\ אדר\\ שמת\\ 4\\ 100\\ 80").append(newSection4)
-                $("#דכרנ\\ טב\\ אבד\\ אתפני\\ אסט\\[טג\\]א\\ \\/\\ בר\\ זבדעה\\ די\\ על\\ קשטא\\ די\\ בדורא\\ \\/\\ בירח\\ אדר\\ שמת\\ 4\\ 100\\ 80").append(newInfo4)
-
-                let newSection5 = document.createElement("h4")
-                newSection5.innerHTML = "Editor's Note: Month Adar"
-                let newInfo5 = document.createElement("text")
-                newInfo5.innerHTML = "Adar is a month in the Hebrew calendar, corresponding roughly to March. Although Palmyrene inscriptions from Dura-Europos use the Seleucid Era for the years, they use the Hebrew calendar for the months. Find out more about Adar at https://en.wikipedia.org/wiki/Adar"
-                $("#דכרנ\\ טב\\ אבד\\ אתפני\\ אסט\\[טג\\]א\\ \\/\\ בר\\ זבדעה\\ די\\ על\\ קשטא\\ די\\ בדורא\\ \\/\\ בירח\\ אדר\\ שמת\\ 4\\ 100\\ 80").append(newSection5)
-                $("#דכרנ\\ טב\\ אבד\\ אתפני\\ אסט\\[טג\\]א\\ \\/\\ בר\\ זבדעה\\ די\\ על\\ קשטא\\ די\\ בדורא\\ \\/\\ בירח\\ אדר\\ שמת\\ 4\\ 100\\ 80").append(newInfo5)
-
-                let newSection6 = document.createElement("h4")
-                newSection6.innerHTML = "Editor's Note: Year 480"
-                let newInfo6 = document.createElement("text")
-                newInfo6.innerHTML = "The year 480 refers to a date in the Seleucid Era, a system of dating instituted by the dynasty of Hellenistic kings created by Seleucus I Nicator. Despite the collapse of the Seleucids and the take over of the region containing Dura-Europos by the Parthian empire, local populations continued to use the same dating system - as we can see here - right through into the Roman era."
-                $("#דכרנ\\ טב\\ אבד\\ אתפני\\ אסט\\[טג\\]א\\ \\/\\ בר\\ זבדעה\\ די\\ על\\ קשטא\\ די\\ בדורא\\ \\/\\ בירח\\ אדר\\ שמת\\ 4\\ 100\\ 80").append(newSection6)
-                $("#דכרנ\\ טב\\ אבד\\ אתפני\\ אסט\\[טג\\]א\\ \\/\\ בר\\ זבדעה\\ די\\ על\\ קשטא\\ די\\ בדורא\\ \\/\\ בירח\\ אדר\\ שמת\\ 4\\ 100\\ 80").append(newInfo6)
-
-                let newSection7 = document.createElement("h4")
-                newSection7.innerHTML = "Editor's Note: Ethphani"
-                let newInfo7 = document.createElement("text")
-                newInfo7.innerHTML = "A Greek rendering, apparently, of the Aramaic name Atpeni. Michael Rostovtzeff, one of the original excavators of Dura-Europos, accordingly restored Ath- instead of Eth- at the beginning of the name in his first edition of the inscription."
-                $("#\\[Ἐθ\\]φανει\\ ἰσταρτήγα").append(newSection7)
-                $("#\\[Ἐθ\\]φανει\\ ἰσταρτήγα").append(newInfo7)
+                modified_text = $("#1inscriptstext").html();
+                modified_text = modified_text.replace("Ethphani", "<a href=\"javascript:editors_note('#1inscriptstext', 'Ethphani', 6)\"><span>Ethphani</span></a>");
+                $("#1inscriptstext").html(modified_text);
             }
 
+            function editors_note(id, name, num) {
+                if (last_note == name) {
+                    $("#ed1").remove();
+                    $("#ed2").remove();
+                    last_note = "";
+                } else {
+                    $("#ed1").remove();
+                    $("#ed2").remove();
+                    let newSection = document.createElement("h4");
+                    newSection.setAttribute("id","ed1");
+                    newSection.innerHTML = "Editor's Note: " + name;
+                    let newInfo = document.createElement("text");
+                    newInfo.setAttribute("id", "ed2");
+                    newInfo.innerHTML = note_array[num];
+                    $(id).append(newSection);
+                    $(id).append(newInfo);
+                    last_note = name;
+                } 
+            }
+
+   
         </script>
     </body>
 

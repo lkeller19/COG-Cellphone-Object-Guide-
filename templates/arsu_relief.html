@@ -26,7 +26,7 @@
     </head>
 
     <br><br><br>
-    <body class="background" onload="addInfo()">
+    <body class="background" onload="mod_text()">
         <nav class="navbar navbar-expand-md navbar-light border-bottom fixed-top scrolling-navbar background">
             <a class="navbar-brand" href="/"><img src="/static/cog.png" style="padding-left: 10%" height="55" alt="COG"></a>
             <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
@@ -96,10 +96,10 @@
                         {%for entry in translations%}
                             <div id="{{loop.index-1}}inscripts">
                                 <h4> Inscription:</h4>
-                                    <text>{{entry[0]}}</text>
+                                    <text id="{{loop.index-1}}inscriptstextl">{{entry[0]}}</text>
                                     <br>
                                 <h4>Translation:</h4>
-                                    <text>{{entry[1]}}</text>
+                                    <text id="{{loop.index-1}}inscriptstext">{{entry[1]}}</text>
                                     <br>
                                 <a onclick="highlight(event)" href="#{{loop.index-1}}inscriptspos"> 
                                     <h4>Location on Image</h4> 
@@ -125,10 +125,14 @@
                             <hr style="border-width:5px">
                         {%endfor%}
                     </div>
-
-                    <a id="explanation">
-                        <p> Explanation of what is going on </p>
-                    </a>
+                    <br><br>
+                    <div>
+                        <h4>Context of Discovery</h4>
+                        <a id="explanation">
+                            <p id="context">The relief of Arsu was found in the pronaos (labelled as room 11 by the excavators) of the Temple of Zeus Megistos at Dura-Europos. It was originally on a wall and was found alongside another fragmentary relief of a man leading a camel, which is thought to be another depiction of Arsu. Traces of black paint were found on the eyes of Arsu and the inscription shows red paint, which would have helped it to stand out in the environment of the temple. Arsu’s hair style is also similar to another sculpted figure from this temple, implying that the individuals dedicating reliefs here were drawing upon the same cultural context.</p>
+                        </a>
+                    </div>
+                    <h4>Location</h4>
                     <p>The Location Shown Below is Approximate, calculated from Map Coordinates and Projected onto a Satellite Image of Dura-Europos</p>
                     <div class= "wrapper" onLoad="loadfunc(40.727421, 34.750515)">
                         <img src="http://www.athenapub.com/aria1/_Syria/md_syria-dura-satellite.jpg" alt="map" class="img-fluid">
@@ -235,22 +239,38 @@
                 $('.pinpoint').css("left", xpercentstring); 
             }, false);
 
-            function addInfo() {
-                let newSection = document.createElement("h4")
-                newSection.innerHTML = "Editor's Note: Arsu"
-                let newInfo = document.createElement("text")
-                newInfo.innerHTML = "A Palmyrene deity, usually depicted with a helmet and small round shield. Here, unusually, he is bare-headed. Find out more about Arsu at https://en.wikipedia.org/wiki/Arsu"
-                // newSection.after(newInfo)
-                $("#אדצר\\ רממ׳א").append(newSection)
-                $("#אדצר\\ רממ׳א").append(newInfo)
+            var last_note = "";
 
-                let newSection2 = document.createElement("h4")
-                newSection2.innerHTML = "Editor's Note: The Camel Rider"
-                let newInfo2 = document.createElement("text")
-                newInfo2.innerHTML = "The translation ‘camel rider’ has been disputed by the various editors of this text. Robert Du Mesnil du Buisson originally offered the translation ‘the spear’, arguing that it represented thunder. H. Ingholt disputed this and suggested ‘camel rider’ instead, pointing to other depictions of Arsu in both Dura and Palmyra. Jean Starcky preferred ‘Arsu and the Rider’, arguing that this referred to a deity that is not depicted in the relief and Ingholt seems to have deferred to her opinion in the 1970s."
-                // newSection.after(newInfo)
-                $("#אדצר\\ רממ׳א").append(newSection2)
-                $("#אדצר\\ רממ׳א").append(newInfo2)
+            var note_array = [
+                "A Palmyrene deity, usually depicted with a helmet and small round shield. Here, unusually, he is bare-headed. Find out more about Arsu on <a href=\"https://en.wikipedia.org/wiki/Arsu\" target=\"_blank\">Wikipedia</a>",
+                "The translation ‘camel rider’ has been disputed by the various editors of this text. Robert Du Mesnil du Buisson originally offered the translation ‘the spear’, arguing that it represented thunder. H. Ingholt disputed this and suggested ‘camel rider’ instead, pointing to other depictions of Arsu in both Dura and Palmyra. Jean Starcky preferred ‘Arsu and the Rider’, arguing that this referred to a deity that is not depicted in the relief and Ingholt seems to have deferred to her opinion in the 1970s."
+            ];
+
+            function mod_text() {
+                let modified_text = $("#0inscriptstext").html();
+                modified_text = modified_text.replace("Arsu", "<a href=\"javascript:editors_note('#0inscriptstext', 'Arsu', 0)\"><span>Arsu</span></a>");
+                modified_text = modified_text.replace("camel rider", "<a href=\"javascript:editors_note('#0inscriptstext', 'Camel Rider', 1)\"><span>camel rider</span></a>");
+                $("#0inscriptstext").html(modified_text);
+            }
+
+            function editors_note(id, name, num) {
+                if (last_note == name) {
+                    $("#ed1").remove();
+                    $("#ed2").remove();
+                    last_note = "";
+                } else {
+                    $("#ed1").remove();
+                    $("#ed2").remove();
+                    let newSection = document.createElement("h4");
+                    newSection.setAttribute("id","ed1");
+                    newSection.innerHTML = "Editor's Note: " + name;
+                    let newInfo = document.createElement("text");
+                    newInfo.setAttribute("id", "ed2");
+                    newInfo.innerHTML = note_array[num];
+                    $(id).append(newSection);
+                    $(id).append(newInfo);
+                    last_note = name;
+                } 
             }
 
         </script>

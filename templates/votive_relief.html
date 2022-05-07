@@ -26,7 +26,7 @@
     </head>
 
     <br><br><br>
-    <body class="background" onload="addInfo()">
+    <body class="background" onload="mod_text()">
         <nav class="navbar navbar-expand-md navbar-light border-bottom fixed-top scrolling-navbar background">
             <a class="navbar-brand" href="/"><img src="/static/cog.png" style="padding-left: 10%" height="55" alt="COG"></a>
             <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
@@ -46,7 +46,7 @@
 
                 <div class="wid">
                     <a href="#explanation">
-                        <h1> Votive Relief of the goddess Nemesis </h1>
+                        <h1> Votive Relief of the Goddess Nemesis </h1>
                     </a>
                     <div class= "wrapper">
                             <img src={{image}} alt="object1" class="img-fluid">
@@ -96,10 +96,10 @@
                         {%for entry in translations%}
                             <div id="{{loop.index-1}}inscripts">
                                 <h4> Inscription:</h4>
-                                    <text>{{entry[0]}}</text>
+                                    <text id="{{loop.index-1}}inscriptstextl">{{entry[0]}}</text>
                                     <br>
                                 <h4>Translation:</h4>
-                                    <text>{{entry[1]}}</text>
+                                    <text id="{{loop.index-1}}inscriptstext">{{entry[1]}}</text>
                                     <br>
                                 <a onclick="highlight(event)" href="#{{loop.index-1}}inscriptspos"> 
                                     <h4>Location on Image</h4> 
@@ -125,10 +125,14 @@
                             <hr style="border-width:5px">
                         {%endfor%}
                     </div>
-
-                    <a id="explanation">
-                        <p> Explaination of what is going on </p>
-                    </a>
+                    <br><br>
+                    <div>
+                        <h4>Context of Discovery</h4>
+                        <a id="explanation">
+                            <p id="context">The votive relief of the goddess Nemesis was found on May 8th 1928 (the very end of the first season of excavation) at the Palmyrene Gate (the main gate in the Western wall of the city) near the third bay. When it was discovered, the relief was broken in two pieces; these have been subsequently mended. There is also evidence that the relief was broken and repaired in antiquity. The faces of all figures, including the griffin at Nemesis’ feet, have been smashed, apparently deliberately.</p>
+                        </a>
+                    </div>
+                    <h4>Location</h4>
                     <p>The Location Shown Below is Approximate, calculated from Map Coordinates and Projected onto a Satellite Image of Dura-Europos</p>
                     <div class= "wrapper" onLoad="loadfunc(40.727421, 34.750515)">
                         <img src="http://www.athenapub.com/aria1/_Syria/md_syria-dura-satellite.jpg" alt="map" class="img-fluid">
@@ -235,49 +239,51 @@
                 }
             });
 
-            function addInfo() {
-                let newSection = document.createElement("h4")
-                newSection.innerHTML = "Editor's Note: Julius Aurelius Malochus"
-                let newInfo = document.createElement("text")
-                newInfo.innerHTML = "The ‘Malochus’ element of this personal name is Aramaic and means ‘counselor’. It has also been found in another inscription from Palmyra, dated to 265 CE, which names a Julius Aurelius Septimius Malkhu son of Maloka son of Nassum. Charles Torrey suggests that since this Maloka was a contemporary of the Maloka in this inscription, they may have come from the same family. It is significant to note that the individual who dedicated this relief uses a Roman tria nomina - the naming convention consisting of three parts which was the preserve of Roman citizens. Find out more about the tria nomina at https://en.wikipedia.org/wiki/Roman_naming_conventions#Tria_nomina"
-                $("#Θεᾆ\\ Νεμέσι\\ Ἰούλιος\\ Αὐρήλιος\\ Μαλωχὰς\\ \\/\\ Σουδαίου\\ Παλμυρηνὸς\\ εὐξάμενος\\ ἀνέθηκεν").append(newSection)
-                $("#Θεᾆ\\ Νεμέσι\\ Ἰούλιος\\ Αὐρήλιος\\ Μαλωχὰς\\ \\/\\ Σουδαίου\\ Παλμυρηνὸς\\ εὐξάμενος\\ ἀνέθηκεν").append(newInfo)
+            var last_note = "";
 
-                let newSection2 = document.createElement("h4")
-                newSection2.innerHTML = "Editor's Note: Nemesis"
-                let newInfo2 = document.createElement("text")
-                newInfo2.innerHTML = "Greco-Roman goddess known for exacting retribution from individuals who show hubris. Find out more at https://en.wikipedia.org/wiki/Nemesis"
-                $("#Θεᾆ\\ Νεμέσι\\ Ἰούλιος\\ Αὐρήλιος\\ Μαλωχὰς\\ \\/\\ Σουδαίου\\ Παλμυρηνὸς\\ εὐξάμενος\\ ἀνέθηκεν").append(newSection2)
-                $("#Θεᾆ\\ Νεμέσι\\ Ἰούλιος\\ Αὐρήλιος\\ Μαλωχὰς\\ \\/\\ Σουδαίου\\ Παλμυρηνὸς\\ εὐξάμενος\\ ἀνέθηκεν").append(newInfo2)
+            var note_array = [
+                "The ‘Malochus’ element of this personal name is Aramaic and means ‘counselor’. It has also been found in another inscription from Palmyra, dated to 265 CE, which names a Julius Aurelius Septimius Malkhu son of Maloka son of Nassum. Charles Torrey suggests that since this Maloka was a contemporary of the Maloka in this inscription, they may have come from the same family. It is significant to note that the individual who dedicated this relief uses a Roman <i>tria nomina</i> - the naming convention consisting of three parts which was the preserve of Roman citizens. Find out more about the <i>tria nomina</i> on <a href=\"https://en.wikipedia.org/wiki/Roman_naming_conventions#Tria_nomina\" target=\"_blank\">Wikipedia</a>",
+                "Greco-Roman goddess known for exacting retribution from individuals who show hubris. Find out more on <a href=\"https://en.wikipedia.org/wiki/Nemesis\" target=\"_blank\">Wikipedia</a>",
+                "Maloka is an Aramaic personal name which means ‘counselor’. It has also been found in another inscription from Palmyra, dated to 265 CE, which names a Julius Aurelius Septimius Malkhu son of Maloka son of Nassum. Charles Torrey suggests that since this Maloka was a contemporary of the Maloka in this inscription, they may have come from the same family.",
+                "Shudai is an Aramaic personal name, which Charles Torrey identifies as deriving from the word meaning ‘promise’ or ‘acknowledgement’. The Greek version of this name, Σουδαίας, is also attested on a stela from Hauran. Torrey speculates that they may refer to the same person. Lucinda Dirven notes, however, that the name is not attested in Palmyra.",
+                "Greco-Roman goddess known for exacting retribution from individuals who show hubris. Intriguingly, unlike other Greco-Roman gods, for whom a Palmyrene equivalent was identified, Nemesis’ name is simply transliterated in the Aramaic text. At the time this relief was discovered, it was the first time the name of the goddess had been found in a Semitic inscription. Find out more about Nemesis on <a href=\"https://en.wikipedia.org/wiki/Nemesis\" target=\"_blank\">Wikipedia</a>",
+                "This date, given in Aramaic numerals, gives a year from the Seleucid Era dating system. This mode of dating was instituted by the dynasty of Hellenistic kings created by Seleucus I Nicator. Despite the collapse of the Seleucids and the take over of the region containing Dura-Europos by the Parthian empire, local populations continued to use the same dating system - as we can see here - right through into the Roman era."
+            ];
 
-                let newSection3 = document.createElement("h4")
-                newSection3.innerHTML = "Editor's Note: Maloka"
-                let newInfo3 = document.createElement("text")
-                newInfo3.innerHTML = "Maloka is an Aramaic personal name which means ‘counselor’. It has also been found in another inscription from Palmyra, dated to 265 CE, which names a Julius Aurelius Septimius Malkhu son of Maloka son of Nassum. Charles Torrey suggests that since this Maloka was a contemporary of the Maloka in this inscription, they may have come from the same family."
-                $("#עבד\\ ומודא\\ מלוכא\\ בר\\ שודי\\ תדמריא\\ לנמסיס\\ \\/\\ שנת\\ \\ 556").append(newSection3)
-                $("#עבד\\ ומודא\\ מלוכא\\ בר\\ שודי\\ תדמריא\\ לנמסיס\\ \\/\\ שנת\\ \\ 556").append(newInfo3)
+            function mod_text() {
+                let modified_text = $("#1inscriptstext").html();
+                modified_text = modified_text.replace("Julius Aurelius Malochus", "<a href=\"javascript:editors_note('#1inscriptstext', 'Julius Aurelius Malochus', 0)\"><span>Julius Aurelius Malochus</span></a>");
+                modified_text = modified_text.replace("Nemesis", "<a href=\"javascript:editors_note('#1inscriptstext', 'Nemesis', 1)\"><span>Nemesis</span></a>");
+                $("#1inscriptstext").html(modified_text);
 
-                let newSection4 = document.createElement("h4")
-                newSection4.innerHTML = "Editor's Note: Shudai"
-                let newInfo4 = document.createElement("text")
-                newInfo4.innerHTML = "Shudai is an Aramaic personal name, which Charles Torrey identifies as deriving from the word meaning ‘promise’ or ‘acknowledgement’. The Greek version of this name, Σουδαίας, is also attested on a stela from Hauran. Torrey speculates that they may refer to the same person. Lucinda Dirven notes, however, that the name is not attested in Palmyra."
-                $("#עבד\\ ומודא\\ מלוכא\\ בר\\ שודי\\ תדמריא\\ לנמסיס\\ \\/\\ שנת\\ \\ 556").append(newSection4)
-                $("#עבד\\ ומודא\\ מלוכא\\ בר\\ שודי\\ תדמריא\\ לנמסיס\\ \\/\\ שנת\\ \\ 556").append(newInfo4)
-
-                let newSection5 = document.createElement("h4")
-                newSection5.innerHTML = "Editor's Note: Nemesis"
-                let newInfo5 = document.createElement("text")
-                newInfo5.innerHTML = "Greco-Roman goddess known for exacting retribution from individuals who show hubris. Intriguingly, unlike other Greco-Roman gods, for whom a Palmyrene equivalent was identified, Nemesis’ name is simply transliterated in the Aramaic text. At the time this relief was discovered, it was the first time the name of the goddess had been found in a Semitic inscription. Find out more about Nemesis at https://en.wikipedia.org/wiki/Nemesis"
-                $("#עבד\\ ומודא\\ מלוכא\\ בר\\ שודי\\ תדמריא\\ לנמסיס\\ \\/\\ שנת\\ \\ 556").append(newSection5)
-                $("#עבד\\ ומודא\\ מלוכא\\ בר\\ שודי\\ תדמריא\\ לנמסיס\\ \\/\\ שנת\\ \\ 556").append(newInfo5)
-
-                let newSection6 = document.createElement("h4")
-                newSection6.innerHTML = "Editor's Note: Year 556"
-                let newInfo6 = document.createElement("text")
-                newInfo6.innerHTML = "This date, given in Aramaic numerals, gives a year from the Seleucid Era dating system. This mode of dating was instituted by the dynasty of Hellenistic kings created by Seleucus I Nicator. Despite the collapse of the Seleucids and the take over of the region containing Dura-Europos by the Parthian empire, local populations continued to use the same dating system - as we can see here - right through into the Roman era."
-                $("#עבד\\ ומודא\\ מלוכא\\ בר\\ שודי\\ תדמריא\\ לנמסיס\\ \\/\\ שנת\\ \\ 556").append(newSection6)
-                $("#עבד\\ ומודא\\ מלוכא\\ בר\\ שודי\\ תדמריא\\ לנמסיס\\ \\/\\ שנת\\ \\ 556").append(newInfo6)
+                modified_text = $("#0inscriptstext").html();
+                modified_text = modified_text.replace("Maloka", "<a href=\"javascript:editors_note('#0inscriptstext', 'Maloka', 2)\"><span>Maloka</span></a>");
+                modified_text = modified_text.replace("Shudai", "<a href=\"javascript:editors_note('#0inscriptstext', 'Shudai', 3)\"><span>Shudai</span></a>");
+                modified_text = modified_text.replace("Nemesis", "<a href=\"javascript:editors_note('#0inscriptstext', 'Nemesis', 4)\"><span>Nemesis</span></a>");
+                modified_text = modified_text.replace("year 556", "<a href=\"javascript:editors_note('#0inscriptstext', 'Year 556', 5)\"><span>year 556</span></a>");
+                $("#0inscriptstext").html(modified_text);
             }
+
+            function editors_note(id, name, num) {
+                if (last_note == name) {
+                    $("#ed1").remove();
+                    $("#ed2").remove();
+                    last_note = "";
+                } else {
+                    $("#ed1").remove();
+                    $("#ed2").remove();
+                    let newSection = document.createElement("h4");
+                    newSection.setAttribute("id","ed1");
+                    newSection.innerHTML = "Editor's Note: " + name;
+                    let newInfo = document.createElement("text");
+                    newInfo.setAttribute("id", "ed2");
+                    newInfo.innerHTML = note_array[num];
+                    $(id).append(newSection);
+                    $(id).append(newInfo);
+                    last_note = name;
+                } 
+            }
+
         </script>
     </body>
 

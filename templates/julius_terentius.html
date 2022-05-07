@@ -26,7 +26,7 @@
     </head>
 
     <br><br><br>
-    <body class="background" onload="addInfo()">
+    <body class="background" onload="mod_text()">
         <nav class="navbar navbar-expand-md navbar-light border-bottom fixed-top scrolling-navbar background">
             <a class="navbar-brand" href="/"><img src="/static/cog.png" style="padding-left: 10%" height="55" alt="COG"></a>
             <button aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar" data-toggle="collapse" type="button">
@@ -96,10 +96,10 @@
                         {%for entry in translations%}
                             <div id="{{loop.index-1}}inscripts">
                                 <h4> Inscription:</h4>
-                                    <text>{{entry[0]}}</text>
+                                    <text id="{{loop.index-1}}inscriptstextl">{{entry[0]}}</text>
                                     <br>
                                 <h4>Translation:</h4>
-                                    <text>{{entry[1]}}</text>
+                                    <text id="{{loop.index-1}}inscriptstext">{{entry[1]}}</text>
                                     <br>
                                 <a onclick="highlight(event)" href="#{{loop.index-1}}inscriptspos"> 
                                     <h4>Location on Image</h4> 
@@ -125,10 +125,15 @@
                             <hr style="border-width:5px">
                         {%endfor%}
                     </div>
-
-                    <a id="explanation">
-                        <p> Explaination of what is going on </p>
-                    </a>
+                    <br><br>
+                    <div>
+                        <h4>Context of Discovery</h4>
+                        <a id="explanation">
+                            <p id="context">The frieze showing Julius Terentius performing a sacrifice alongside his cohort was first recorded by James Henry Breasted in 1920, during his single day of field work at the site, which initiated the modern period of scholarly work on the city. The discovery was especially significant because the labelling of the Tyche of Dura in the frieze was the first indication of the ancient name of the city, which was otherwise known as Salhiyah after the nearby village. It was just one painting among many on the north wall of the pronaos (the room before the main shrine) in the Temple of Bel (otherwise known as the Temple of the Palmyrene Gods or the Temple of the Oriental Gods). The same wall also depicted many other scenes, which were recorded in photos and illustrations by Franz Cumont when he visited the site in 1922 through 1923. The paintings were removed from the wall in 1930, however, along with many others from the other walls of the pronaos and most were split between the National Museum of Damascus and the Yale University Art Gallery. The exact location of all the friezes adorning the north wall are not known, however, since the different scenes shown on the walls were separated in the removal process. It is now only possible to get a sense of this frieze in its original context via the sketches made by Cumont.</p>
+                        </a>
+                        <img src="/static/Cumont_Drawing.jpg" alt="Cumont's Drawing" class="img-fluid">
+                    </div>
+                    <h4>Location</h4>
                     <p>The Location Shown Below is Approximate, calculated from Map Coordinates and Projected onto a Satellite Image of Dura-Europos</p>
                     <div class= "wrapper" onLoad="loadfunc(40.727421, 34.750515)">
                         <img src="http://www.athenapub.com/aria1/_Syria/md_syria-dura-satellite.jpg" alt="map" class="img-fluid">
@@ -235,8 +240,54 @@
                 }
             });
 
-            function addInfo() {
-                
+            var last_note = "";
+
+            var note_array = [
+                "Julius Terentius is seen here along side the <i>cohors XX Palmyrenorum</i>, the 20th Palmyrene cohort, of which he was the military tribune. He is also known from another inscription - his epitaph, which puts his date of death at circa 239 CE.<img src=\"/static/Funerary_Inscription_for_Julius_Terentius_-_YDEA_-_6423.jpg\" alt=\"Epitaph\" class=\"img-fluid\">",
+                "A tribune was an officer within the Roman Army. Find out more on <a href=\"https://en.wikipedia.org/wiki/Tribune#Military_tribunes\" target=\"_blank\">Wikipedia</a>",
+                "This inscription is now so faded that it is no longer visible to the naked eye. Drawings of the fresco made by the excavators, however, recorded this information so that it is possible to reconstruct what was originally present.<img src=\"/static/Drawing_of_the_fresco_of_Julius_Terentius.jpg\" alt=\"Epitaph\" class=\"img-fluid\">",
+                "Tyche was the Greek goddess of fortune, who served as the titulary deity for cities, protecting their fortune and prosperity. Find out more on <a href=\"https://en.wikipedia.org/wiki/Tyche\" target=\"_blank\">Wikipedia</a>",
+                "When this inscription was first recorded and read by James Henry Breasted in 1920, it was the first time in the modern history of the site that the name of the ancient city had been recognised. This allowed the standing ruins to be connected with the few ancient written sources that mentioned Dura-Europos.",
+            ];
+
+            function mod_text() {
+                let modified_text = $("#0inscriptstext").html();
+                modified_text = modified_text.replace("Julius Terentius", "<a href=\"javascript:editors_note('#0inscriptstext', 'Julius Terentius', 0)\"><span>Julius Terentius</span></a>");
+                modified_text = modified_text.replace("Tribune", "<a href=\"javascript:editors_note('#0inscriptstext', 'Tribune', 1)\"><span>Tribune</span></a>");
+                $("#0inscriptstext").html(modified_text);
+
+                modified_text = $("#1inscriptstextl").html();
+                modified_text = modified_text.replace("Τύχη Παλμύρων Τύχη Δούρας", "<a href=\"javascript:editors_note('#1inscriptstext', 'Τύχη Παλμύρων Τύχη Δούρας', 2)\"><span>Τύχη Παλμύρων Τύχη Δούρας</span></a>");
+                $("#1inscriptstextl").html(modified_text);
+
+                modified_text = $("#1inscriptstext").html();
+                modified_text = modified_text.replace("Tyche", "<a href=\"javascript:editors_note('#1inscriptstext', 'Tyche', 3)\"><span>Tyche</span></a>");
+                modified_text = modified_text.replace("Dura", "<a href=\"javascript:editors_note('#1inscriptstext', 'Dura', 4)\"><span>Dura</span></a>");
+                $("#1inscriptstext").html(modified_text);
+
+                modified_text = $("#2inscriptstextl").html();
+                modified_text = modified_text.replace("θέμης Μοκίμ(ου) ἱερεύς", "<a href=\"javascript:editors_note('#2inscriptstext', 'θέμης Μοκίμ(ου) ἱερεύς', 2)\"><span>θέμης Μοκίμ(ου) ἱερεύς</span></a>");
+                $("#2inscriptstextl").html(modified_text);
+            }
+
+            function editors_note(id, name, num) {
+                if (last_note == name) {
+                    $("#ed1").remove();
+                    $("#ed2").remove();
+                    last_note = "";
+                } else {
+                    $("#ed1").remove();
+                    $("#ed2").remove();
+                    let newSection = document.createElement("h4");
+                    newSection.setAttribute("id","ed1");
+                    newSection.innerHTML = "Editor's Note: " + name;
+                    let newInfo = document.createElement("text");
+                    newInfo.setAttribute("id", "ed2");
+                    newInfo.innerHTML = note_array[num];
+                    $(id).append(newSection);
+                    $(id).append(newInfo);
+                    last_note = name;
+                } 
             }
 
         </script>
