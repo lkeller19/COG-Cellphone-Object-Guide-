@@ -161,17 +161,18 @@ h4 {
     position: absolute; 
     top: 0%; 
     left: 0%; 
-    border: solid blue; 
     padding-bottom: 10%; 
     padding-right:10%
 }
 
 .inscriptions {
     display: block;
+    border: 3px solid blue;
 }
 
 .depictions {
     display: block;
+    border: 3px solid red;
 }
 
 path {
@@ -189,4 +190,9 @@ path {
 .qr-code {
     max-width: 200px;
     margin: 10px;
+  }
+
+  html {
+    scroll-padding-top: 150px; /* height of sticky header */
+    scroll-behavior: smooth;
   }

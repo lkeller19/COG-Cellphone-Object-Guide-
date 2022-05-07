@@ -51,27 +51,17 @@
                     <div class= "wrapper">
                             <img src={{image}} alt="object1" class="img-fluid">
                             {%for entry in depictions%}
-                                <a href="#{{loop.index-1}}.depicts">
-                                    <div class="boundingbox depictions" style="left: {{entry[1][0]}}%; top: {{entry[1][1]}}%; padding-right: {{entry[1][2] * 0.9}}%; padding-bottom: {{entry[1][3] * 0.85}}%;" id="{{loop.index-1}}.depicts.pos"></div>
+                                <a href="#{{loop.index-1}}depicts">
+                                    <div class="boundingbox depictions" style="left: {{entry[1][0]}}%; top: {{entry[1][1]}}%; padding-right: {{entry[1][2] * 0.9}}%; padding-bottom: {{entry[1][3] * 0.85}}%;" id="{{loop.index-1}}depictspos"></div>
                                 </a>
                             {%endfor%}
                             {%for entry in translations%}
-                                <a href="#{{loop.index-1}}.inscripts">
-                                    <div class="boundingbox inscriptions" style="left: {{entry[2][0]}}%; top: {{entry[2][1]}}%; padding-right: {{entry[2][2] * 0.9}}%; padding-bottom: {{entry[2][3] * 0.85}}%;" id="{{loop.index-1}}.inscripts.pos"></div>
+                                <a href="#{{loop.index-1}}inscripts">
+                                    <div class="boundingbox inscriptions" style="left: {{entry[2][0]}}%; top: {{entry[2][1]}}%; padding-right: {{entry[2][2] * 0.9}}%; padding-bottom: {{entry[2][3] * 0.85}}%;" id="{{loop.index-1}}inscriptspos"></div>
                                 </a>
                             {%endfor%}
                     </div>
-
-                    <label for="colors">If desired, change bounding box outline color:</label>
-
-                    <select name="colors" id="colors">
-                        <option value="blue" selected>Blue</option>
-                        <option value="silver">Silver</option>
-                        <option value="red">Red</option>
-                        <option value="black">Black</option>
-                    </select>
                     <br>
-
                     <label for="boxes">Select the boxes you would like to see:</label>
 
                     <select name="boxes" id="boxes">
@@ -79,13 +69,32 @@
                         <option value="inscriptions">Inscriptions only</option>
                         <option value="depictions">Depictions only</option>
                     </select>
+                    <br>
+
+                    <label for="inscolors">If desired, change inscription bounding box outline color:</label>
+
+                    <select name="inscolors" id="inscolors">
+                        <option value="blue" selected>Blue</option>
+                        <option value="silver">Silver</option>
+                        <option value="red">Red</option>
+                        <option value="black">Black</option>
+                    </select>
+                    <br>
+                    <label for="depcolors">If desired, change depiction bounding box outline color:</label>
+
+                    <select name="depcolors" id="depcolors">
+                        <option value="blue">Blue</option>
+                        <option value="silver">Silver</option>
+                        <option value="red" selected>Red</option>
+                        <option value="black">Black</option>
+                    </select>
 
                     <br>
                     <div>
                         <!-- Loading in data from Flask and using Jinja to put the data onto the page-->
                         <h1>Inscriptions on this Object</h1> <br>
                         {%for entry in translations%}
-                            <div id="{{loop.index-1}}.inscripts">
+                            <div id="{{loop.index-1}}inscripts">
                                 <h4> Inscription:</h4>
                                     <text>{{entry[0]}}</text>
                                     <br>
@@ -93,7 +102,7 @@
                                     <text>{{entry[1]}}</text>
                                     <br>
                             </div>
-                            <a href="#{{loop.index-1}}.inscripts.pos"> 
+                            <a onclick="emphasize_border(event)" href="#{{loop.index-1}}inscriptspos"> 
                                 <h4>Location on Image</h4> 
                             </a>
                             <hr style="border-width:5px">    
@@ -106,10 +115,10 @@
                         <h1>Depictions on this Object</h1> <br>
                         {%for entry in depictions%}
                             {% set title = page_titles[loop.index-1] %}
-                            <div id="{{loop.index-1}}.depicts">
+                            <div id="{{loop.index-1}}depicts">
                                 <h4>Depicts:</h4>
                                     <a href="{{entry[0]}}">{{title}}</a>
-                                <a href="#{{loop.index-1}}.depicts.pos"> 
+                                <a onclick="emphasize_border(event)" href="#{{loop.index-1}}depictspos"> 
                                     <h4>Location on Image</h4> 
                                 </a>
                             </div>
@@ -141,18 +150,35 @@
                 <br>
                 <div class="border-top">
                 <br>
-                        <p>Contact: <a href="mailto:cog@yale.edu">cog@yale.edu</a></p>
+                <p>Contact: <a href="mailto:jasmine.sahu-hough@yale.edu">jasmine.sahu-hough@yale.edu</a></p>
                 </div>
             </main>
         </div>
-        <button id="btnScrollToTop"> 
-            <i class="material-icons">arrow_upward</i>
-        </button> 
+        <a href="#top">
+            <button id="btnScrollToTop"> 
+                <i class="material-icons">arrow_upward</i>
+            </button> 
+        </a>
         <script> 
-            const btnScrollToTop = document.querySelector("#btnScrollToTop"); 
-            btnScrollToTop.addEventListener("click", function() { 
-                $("html, body").animate({scrollTop: 0 }, "slow"); 
-            }); 
+            var emphasized = null;
+ 
+            function emphasize_border(event) {
+                let anchor = event.target.closest("a");
+                let temp = anchor.getAttribute("href");
+                let color = null;
+                if (temp.includes("inscript")) {
+                    color = $("#inscolors").val();
+                } else {
+                    color = $("#depcolors").val();
+                }
+                
+                if (emphasized != null) {
+                    $(emphasized).css("border", "3px solid " + color);
+                }
+                
+                emphasized = temp;
+                $(emphasized).css("border", "5px dashed " + color);
+            }
 
             document.addEventListener('DOMContentLoaded', function() {
                 const xval = (40.730809 * 60321.7158176944) - 2456580;
@@ -165,9 +191,15 @@
                 $('.pinpoint').css("left", xpercentstring); 
             }, false);
             
-            $("#colors").change(function(){
-                let color = $("#colors").val();
-                $('.boundingbox').css("border", "solid " + color);
+            $("#inscolors").change(function(){
+                let color = $("#inscolors").val();
+                $('.inscriptions').css("border", "solid " + color);
+                $('path').css("fill", color);
+            });
+            
+            $("#depcolors").change(function(){
+                let color = $("#depcolors").val();
+                $('.depictions').css("border", "solid " + color);
                 $('path').css("fill", color);
             });
 
