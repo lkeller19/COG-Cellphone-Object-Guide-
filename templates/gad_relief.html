@@ -255,20 +255,20 @@
             ];
 
             function mod_text() {
-                let modified_text = $("#1inscriptstext").html();
-                modified_text = modified_text.replace("Gad of Dura", "<a href=\"javascript:editors_note('#1inscriptstext', 'Gad of Dura', 0)\"><span>Gad of Dura</span></a>");
-                modified_text = modified_text.replace("Hairan", "<a href=\"javascript:editors_note('#1inscriptstext', 'Hairan son of Maliku', 1)\"><span>Hairan</span></a>");
-                modified_text = modified_text.replace("month Nisan", "<a href=\"javascript:editors_note('#1inscriptstext', 'Month Nisan', 2)\"><span>month Nisan</span></a>");
-                modified_text = modified_text.replace("year 470", "<a href=\"javascript:editors_note('#1inscriptstext', 'Year 470', 3)\"><span>year 470</span></a>");
-                $("#1inscriptstext").html(modified_text);
+                let modified_text = $("#0inscriptstext").html();
+                modified_text = modified_text.replace("Gad of Dura", "<a href=\"javascript:editors_note('#0inscriptstext', 'Gad of Dura', 0)\"><span>Gad of Dura</span></a>");
+                modified_text = modified_text.replace("Hairan", "<a href=\"javascript:editors_note('#0inscriptstext', 'Hairan son of Maliku', 1)\"><span>Hairan</span></a>");
+                modified_text = modified_text.replace("month Nisan", "<a href=\"javascript:editors_note('#0inscriptstext', 'Month Nisan', 2)\"><span>month Nisan</span></a>");
+                modified_text = modified_text.replace("year 470", "<a href=\"javascript:editors_note('#0inscriptstext', 'Year 470', 3)\"><span>year 470</span></a>");
+                $("#0inscriptstext").html(modified_text);
 
                 modified_text = $("#2inscriptstext").html();
                 modified_text = modified_text.replace("Seleukos Nikator", "<a href=\"javascript:editors_note('#2inscriptstext', 'Seleukos Nikator', 4)\"><span>Seleukos Nikator</span></a>");
                 $("#2inscriptstext").html(modified_text);
 
-                modified_text = $("#3inscriptstext").html();
-                modified_text = modified_text.replace("Hairan", "<a href=\"javascript:editors_note('#3inscriptstext', 'Hairan son of Maliku ', 5)\"><span>Hairan</span></a>");
-                $("#3inscriptstext").html(modified_text);
+                modified_text = $("#1inscriptstext").html();
+                modified_text = modified_text.replace("Hairan", "<a href=\"javascript:editors_note('#1inscriptstext', 'Hairan son of Maliku ', 5)\"><span>Hairan</span></a>");
+                $("#1inscriptstext").html(modified_text);
             }
 
             function editors_note(id, name, num) {

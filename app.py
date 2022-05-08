@@ -95,7 +95,7 @@ def arsu_relief():
 
     titles = get_titles(sorted_info[1])
 
-    return render_template('latin_object.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
+    return render_template('arsu_relief.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
 
 @app.route("/gad_relief")
 def gad_relief():
@@ -107,7 +107,7 @@ def gad_relief():
 
     titles = get_titles(sorted_info[1])
 
-    return render_template('latin_object.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
+    return render_template('gad_relief.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
 
 @app.route("/julius_terentius")
 def julius_terentius():
@@ -119,7 +119,7 @@ def julius_terentius():
 
     titles = get_titles(sorted_info[1])
 
-    return render_template('latin_object.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
+    return render_template('julius_terentius.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
 
 @app.route("/mithras_relief")
 def mithras_relief():
@@ -131,7 +131,7 @@ def mithras_relief():
 
     titles = get_titles(sorted_info[1])
 
-    return render_template('latin_object.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
+    return render_template('mithras_relief.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
 
 @app.route("/votive_relief")
 def votive_relief():
@@ -143,7 +143,7 @@ def votive_relief():
 
     titles = get_titles(sorted_info[1])
 
-    return render_template('latin_object.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
+    return render_template('votive_relief.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
 
 def parse_query_data(data, d2):
     image = data["results"]["bindings"][0]["image"]["value"]

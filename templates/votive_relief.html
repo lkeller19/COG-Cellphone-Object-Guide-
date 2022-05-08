@@ -255,17 +255,17 @@
             ];
 
             function mod_text() {
-                let modified_text = $("#1inscriptstext").html();
-                modified_text = modified_text.replace("Julius Aurelius Malochus", "<a href=\"javascript:editors_note('#1inscriptstext', 'Julius Aurelius Malochus', 0)\"><span>Julius Aurelius Malochus</span></a>");
-                modified_text = modified_text.replace("Nemesis", "<a href=\"javascript:editors_note('#1inscriptstext', 'Nemesis', 1)\"><span>Nemesis</span></a>");
-                $("#1inscriptstext").html(modified_text);
-
-                modified_text = $("#0inscriptstext").html();
-                modified_text = modified_text.replace("Maloka", "<a href=\"javascript:editors_note('#0inscriptstext', 'Maloka', 2)\"><span>Maloka</span></a>");
-                modified_text = modified_text.replace("Shudai", "<a href=\"javascript:editors_note('#0inscriptstext', 'Shudai', 3)\"><span>Shudai</span></a>");
-                modified_text = modified_text.replace("Nemesis", "<a href=\"javascript:editors_note('#0inscriptstext', 'Nemesis', 4)\"><span>Nemesis</span></a>");
-                modified_text = modified_text.replace("year 556", "<a href=\"javascript:editors_note('#0inscriptstext', 'Year 556', 5)\"><span>year 556</span></a>");
+                let modified_text = $("#0inscriptstext").html();
+                modified_text = modified_text.replace("Julius Aurelius Malochus", "<a href=\"javascript:editors_note('#0inscriptstext', 'Julius Aurelius Malochus', 0)\"><span>Julius Aurelius Malochus</span></a>");
+                modified_text = modified_text.replace("Nemesis", "<a href=\"javascript:editors_note('#0inscriptstext', 'Nemesis', 1)\"><span>Nemesis</span></a>");
                 $("#0inscriptstext").html(modified_text);
+
+                modified_text = $("#1inscriptstext").html();
+                modified_text = modified_text.replace("Maloka", "<a href=\"javascript:editors_note('#1inscriptstext', 'Maloka', 2)\"><span>Maloka</span></a>");
+                modified_text = modified_text.replace("Shudai", "<a href=\"javascript:editors_note('#1inscriptstext', 'Shudai', 3)\"><span>Shudai</span></a>");
+                modified_text = modified_text.replace("Nemesis", "<a href=\"javascript:editors_note('#1inscriptstext', 'Nemesis', 4)\"><span>Nemesis</span></a>");
+                modified_text = modified_text.replace("year 556", "<a href=\"javascript:editors_note('#1inscriptstext', 'Year 556', 5)\"><span>year 556</span></a>");
+                $("#1inscriptstext").html(modified_text);
             }
 
             function editors_note(id, name, num) {

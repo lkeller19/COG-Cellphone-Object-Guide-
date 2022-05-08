@@ -21,7 +21,7 @@
 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <title>COG</title>
+        <title>Latin Inscription</title>
 
     </head>
 
@@ -260,15 +260,15 @@
             ];
 
             function mod_text() {
-                let modified_text = $("#0inscriptstextl").html();
-                modified_text = modified_text.replace("Impera\[tori\]", "<a href=\"javascript:editors_note('#0inscriptstext', 'Impera[tori]', 0)\"><span>Impera[tori]</span></a>");
-                modified_text = modified_text.replace("Caesari", "<a href=\"javascript:editors_note('#0inscriptstext', 'Caesari', 1)\"><span>Caesari</span></a>");
-                modified_text = modified_text.replace("summo summo", "<a href=\"javascript:editors_note('#0inscriptstext', 'Summo Summo', 2)\"><span>summo summo</span></a>");
-                $("#0inscriptstextl").html(modified_text);
+                let modified_text = $("#1inscriptstextl").html();
+                modified_text = modified_text.replace("Impera\[tori\]", "<a href=\"javascript:editors_note('#1inscriptstext', 'Impera[tori]', 0)\"><span>Impera[tori]</span></a>");
+                modified_text = modified_text.replace("Caesari", "<a href=\"javascript:editors_note('#1inscriptstext', 'Caesari', 1)\"><span>Caesari</span></a>");
+                modified_text = modified_text.replace("summo summo", "<a href=\"javascript:editors_note('#1inscriptstext', 'Summo Summo', 2)\"><span>summo summo</span></a>");
+                $("#1inscriptstextl").html(modified_text);
 
-                modified_text = $("#5inscriptstextl").html();
-                modified_text = modified_text.replace("S(enatus) P(opulus)Q(ue) [R(omanus)]", "<a href=\"javascript:editors_note('#5inscriptstext', 'SPQR', 3)\"><span>S(enatus) P(opulus)Q(ue) [R(omanus)]</span></a>");
-                $("#5inscriptstextl").html(modified_text);
+                modified_text = $("#0inscriptstextl").html();
+                modified_text = modified_text.replace("S(enatus) P(opulus)Q(ue) [R(omanus)]", "<a href=\"javascript:editors_note('#0inscriptstext', 'SPQR', 3)\"><span>S(enatus) P(opulus)Q(ue) [R(omanus)]</span></a>");
+                $("#0inscriptstextl").html(modified_text);
 
                 modified_text = $("#2inscriptstextl").html();
                 modified_text = modified_text.replace("Spem bonam", "<a href=\"javascript:editors_note('#2inscriptstext', 'Spem Bonam', 4)\"><span>Spem bonam</span></a>");
@@ -277,9 +277,9 @@
                 modified_text = modified_text.replace("leg(ionis) IIII Scy(thicae)", "<a href=\"javascript:editors_note('#2inscriptstext', 'Legio III Scythica', 7)\"><span>leg(ionis) IIII Scy(thicae)</span></a>");
                 $("#2inscriptstextl").html(modified_text);
 
-                modified_text = $("#1inscriptstextl").html();
-                modified_text = modified_text.replace("534", "<a href=\"javascript:editors_note('#1inscriptstext', '534', 8)\"><span>534</span></a>");
-                $("#1inscriptstextl").html(modified_text);
+                modified_text = $("#3inscriptstextl").html();
+                modified_text = modified_text.replace("534", "<a href=\"javascript:editors_note('#3inscriptstext', '534', 8)\"><span>534</span></a>");
+                $("#3inscriptstextl").html(modified_text);
             }
 
 

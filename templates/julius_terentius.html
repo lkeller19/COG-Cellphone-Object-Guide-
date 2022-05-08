@@ -255,23 +255,23 @@
             ];
 
             function mod_text() {
-                let modified_text = $("#0inscriptstext").html();
-                modified_text = modified_text.replace("Julius Terentius", "<a href=\"javascript:editors_note('#0inscriptstext', 'Julius Terentius', 0)\"><span>Julius Terentius</span></a>");
-                modified_text = modified_text.replace("Tribune", "<a href=\"javascript:editors_note('#0inscriptstext', 'Tribune', 1)\"><span>Tribune</span></a>");
-                $("#0inscriptstext").html(modified_text);
-
-                modified_text = $("#1inscriptstextl").html();
-                modified_text = modified_text.replace("Τύχη Παλμύρων Τύχη Δούρας", "<a href=\"javascript:editors_note('#1inscriptstext', 'Τύχη Παλμύρων Τύχη Δούρας', 2)\"><span>Τύχη Παλμύρων Τύχη Δούρας</span></a>");
-                $("#1inscriptstextl").html(modified_text);
-
-                modified_text = $("#1inscriptstext").html();
-                modified_text = modified_text.replace("Tyche", "<a href=\"javascript:editors_note('#1inscriptstext', 'Tyche', 3)\"><span>Tyche</span></a>");
-                modified_text = modified_text.replace("Dura", "<a href=\"javascript:editors_note('#1inscriptstext', 'Dura', 4)\"><span>Dura</span></a>");
+                let modified_text = $("#1inscriptstext").html();
+                modified_text = modified_text.replace("Julius Terentius", "<a href=\"javascript:editors_note('#1inscriptstext', 'Julius Terentius', 0)\"><span>Julius Terentius</span></a>");
+                modified_text = modified_text.replace("Tribune", "<a href=\"javascript:editors_note('#1inscriptstext', 'Tribune', 1)\"><span>Tribune</span></a>");
                 $("#1inscriptstext").html(modified_text);
 
                 modified_text = $("#2inscriptstextl").html();
-                modified_text = modified_text.replace("θέμης Μοκίμ(ου) ἱερεύς", "<a href=\"javascript:editors_note('#2inscriptstext', 'θέμης Μοκίμ(ου) ἱερεύς', 2)\"><span>θέμης Μοκίμ(ου) ἱερεύς</span></a>");
+                modified_text = modified_text.replace("Τύχη Παλμύρων Τύχη Δούρας", "<a href=\"javascript:editors_note('#2inscriptstext', 'Τύχη Παλμύρων Τύχη Δούρας', 2)\"><span>Τύχη Παλμύρων Τύχη Δούρας</span></a>");
                 $("#2inscriptstextl").html(modified_text);
+
+                modified_text = $("#2inscriptstext").html();
+                modified_text = modified_text.replace("Tyche", "<a href=\"javascript:editors_note('#2inscriptstext', 'Tyche', 3)\"><span>Tyche</span></a>");
+                modified_text = modified_text.replace("Dura", "<a href=\"javascript:editors_note('#2inscriptstext', 'Dura', 4)\"><span>Dura</span></a>");
+                $("#2inscriptstext").html(modified_text);
+
+                modified_text = $("#0inscriptstextl").html();
+                modified_text = modified_text.replace("θέμης Μοκίμ(ου) ἱερεύς", "<a href=\"javascript:editors_note('#0inscriptstext', 'θέμης Μοκίμ(ου) ἱερεύς', 2)\"><span>θέμης Μοκίμ(ου) ἱερεύς</span></a>");
+                $("#0inscriptstextl").html(modified_text);
             }
 
             function editors_note(id, name, num) {

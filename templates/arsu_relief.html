@@ -251,10 +251,10 @@
             ];
 
             function mod_text() {
-                let modified_text = $("#0inscriptstext").html();
-                modified_text = modified_text.replace("Arsu", "<a href=\"javascript:editors_note('#0inscriptstext', 'Arsu', 0)\"><span>Arsu</span></a>");
-                modified_text = modified_text.replace("camel rider", "<a href=\"javascript:editors_note('#0inscriptstext', 'Camel Rider', 1)\"><span>camel rider</span></a>");
-                $("#0inscriptstext").html(modified_text);
+                let modified_text = $("#1inscriptstext").html();
+                modified_text = modified_text.replace("Arsu", "<a href=\"javascript:editors_note('#1inscriptstext', 'Arsu', 0)\"><span>Arsu</span></a>");
+                modified_text = modified_text.replace("camel rider", "<a href=\"javascript:editors_note('#1inscriptstext', 'Camel Rider', 1)\"><span>camel rider</span></a>");
+                $("#1inscriptstext").html(modified_text);
             }
 
             function editors_note(id, name, num) {
