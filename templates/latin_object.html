@@ -89,7 +89,7 @@
                         <option value="red" selected>Red</option>
                         <option value="black">Black</option>
                     </select>      
-                                  
+
                     <div id="i">
                         <br><br>
                         <!-- Loading in data from Flask and using Jinja to put the data onto the page-->
@@ -212,13 +212,13 @@
 
             $("#inscolors").change(function(){
                 let color = $("#inscolors").val();
-                $('.inscriptions').css("border", "solid " + color);
+                $('.inscriptions').css("border", "3px solid " + color);
                 $('path').css("fill", color);
             });
             
             $("#depcolors").change(function(){
                 let color = $("#depcolors").val();
-                $('.depictions').css("border", "solid " + color);
+                $('.depictions').css("border", "3px solid " + color);
                 $('path').css("fill", color);
             });
 
