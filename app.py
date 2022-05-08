@@ -1,3 +1,4 @@
+from tabnanny import check
 from turtle import position
 from flask import Flask, render_template
 import json
@@ -77,36 +78,12 @@ def latin_inscription():
     data = query_wd(queries[0], queries[1])
 
     info = parse_query_data(data[0], data[1])
+    sorted_info = sort_data([info[1], info[2]])
 
-    titles = get_titles(info[2])
+    titles = get_titles(sorted_info[1])
 
-    return render_template('latin_object.html', image=info[0], translations=info[1], depictions=info[2], page_titles=titles)
-    # image = data["results"]["bindings"][0]["image"]["value"]
-    # all_transl = data["results"]["bindings"]
-    # translations = []
+    return render_template('latin_object.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
 
-    # for i in range(len(all_transl)):
-    #     temp = []
-    #     temp.append(all_transl[i]["inscription"]["value"])
-    #     temp.append(all_transl[i]["translation"]["value"])
-    #     temp.append(split_pos(all_transl[i]["position"]["value"]))
-
-        
-    #     translations.append(temp)
-    
-    # # print(translations)
-    # # print(d2)
-
-    # all_depicts = d2["results"]["bindings"]
-    # depictions = []
-
-    # for i in range(len(all_depicts)):
-    #     temp = []
-    #     temp.append(all_depicts[i]["depiction"]["value"])
-    #     temp.append(split_pos(all_depicts[i]["position"]["value"]))
-    #     depictions.append(temp)
-
-    # return render_template('latin_object.html', image=image, translations=translations, depictions=depictions)
 
 @app.route("/arsu_relief")
 def arsu_relief():
@@ -114,10 +91,11 @@ def arsu_relief():
     data = query_wd(queries[0], queries[1])
 
     info = parse_query_data(data[0], data[1])
+    sorted_info = sort_data([info[1], info[2]])
 
-    titles = get_titles(info[2])
+    titles = get_titles(sorted_info[1])
 
-    return render_template('arsu_relief.html', image=info[0], translations=info[1], depictions=info[2], page_titles=titles)
+    return render_template('latin_object.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
 
 @app.route("/gad_relief")
 def gad_relief():
@@ -125,10 +103,11 @@ def gad_relief():
     data = query_wd(queries[0], queries[1])
 
     info = parse_query_data(data[0], data[1])
+    sorted_info = sort_data([info[1], info[2]])
 
-    titles = get_titles(info[2])
+    titles = get_titles(sorted_info[1])
 
-    return render_template('gad_relief.html', image=info[0], translations=info[1], depictions=info[2], page_titles=titles)
+    return render_template('latin_object.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
 
 @app.route("/julius_terentius")
 def julius_terentius():
@@ -136,10 +115,11 @@ def julius_terentius():
     data = query_wd(queries[0], queries[1])
 
     info = parse_query_data(data[0], data[1])
+    sorted_info = sort_data([info[1], info[2]])
 
-    titles = get_titles(info[2])
+    titles = get_titles(sorted_info[1])
 
-    return render_template('julius_terentius.html', image=info[0], translations=info[1], depictions=info[2], page_titles=titles)
+    return render_template('latin_object.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
 
 @app.route("/mithras_relief")
 def mithras_relief():
@@ -147,10 +127,11 @@ def mithras_relief():
     data = query_wd(queries[0], queries[1])
 
     info = parse_query_data(data[0], data[1])
+    sorted_info = sort_data([info[1], info[2]])
 
-    titles = get_titles(info[2])
+    titles = get_titles(sorted_info[1])
 
-    return render_template('mithras_relief.html', image=info[0], translations=info[1], depictions=info[2], page_titles=titles)
+    return render_template('latin_object.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
 
 @app.route("/votive_relief")
 def votive_relief():
@@ -158,10 +139,11 @@ def votive_relief():
     data = query_wd(queries[0], queries[1])
 
     info = parse_query_data(data[0], data[1])
+    sorted_info = sort_data([info[1], info[2]])
 
-    titles = get_titles(info[2])
+    titles = get_titles(sorted_info[1])
 
-    return render_template('votive_relief.html', image=info[0], translations=info[1], depictions=info[2], page_titles=titles)
+    return render_template('latin_object.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
 
 def parse_query_data(data, d2):
     image = data["results"]["bindings"][0]["image"]["value"]
@@ -176,9 +158,6 @@ def parse_query_data(data, d2):
 
         
         translations.append(temp)
-    
-    # print(translations)
-    # print(d2)
 
     all_depicts = d2["results"]["bindings"]
     depictions = []
@@ -228,3 +207,28 @@ def get_titles(urls):
         title = js["entities"][list(js["entities"].keys())[0]]["labels"]["en"]["value"]
         titles.append(title)
     return titles
+
+# Sorts into reverse order so that the first bounding box added is the largest
+# Allows the smallest bounding box to be on top
+def sort_data(parsed_data):
+    return_data = []
+
+    return_data = [sorted(parsed_data[0], key=bound_area, reverse=True), sorted(parsed_data[1], key=bound_area, reverse=True)]
+
+    return return_data
+
+def bound_area(element):
+    if len(element) == 3:
+        w = element[2][2]
+        h = element[2][3]
+    else:
+        w = element[1][2]
+        h = element[1][3]
+    return w*h
+
+# validation function to make sure sort_data is working properly
+def check_sort(array):
+    for element in array:
+        print(element)
+        print(bound_area(element))
+    return
