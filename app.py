@@ -1,10 +1,6 @@
-from tabnanny import check
-from turtle import position
 from flask import Flask, render_template
 import json
 import requests
-
-# import wptools -- doesn't work
 
 # probably best to load these queries in from the SPARQL-queries folder 
 # and put them in arrays or something for each page
