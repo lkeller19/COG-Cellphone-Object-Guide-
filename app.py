@@ -34,15 +34,6 @@ WHERE
 }
 '''
 
-# r = requests.get(url, params = {'format': 'json', 'query': query})
-# data = r.json()
-# # https://stackoverflow.com/questions/55961615/how-to-integrate-wikidata-query-in-python
-
-# #ABOVE INFO CAN BE USED FOR QUERY ENTRIES
-
-# r = requests.get(url, params = {'format': 'json', 'query': q2})
-# d2 = r.json()
-
 
 
 app = Flask(__name__)
