@@ -1,7 +1,7 @@
 SELECT DISTINCT ?item ?itemLabel ?image ?depiction ?position
 WHERE 
 {
-  ?item wdt:P8583 "34184";
+  ?item wdt:P8583 "25173";
         wdt:P18 ?image;
         p:P180 ?statement1.
   ?statement1 ps:P180 ?depiction.
