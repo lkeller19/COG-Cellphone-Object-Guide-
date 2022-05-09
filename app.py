@@ -75,10 +75,18 @@ def latin_inscription():
 
     info = parse_query_data(data[0], data[1])
     sorted_info = sort_data([info[1], info[2]])
+    for d in sorted_info[1]:
+        counter = 0
+        for num in d[1]:
+            d[1][counter] = float(num) + .1
+            counter += 1
+        d[1][0] -= 2
+
+    z_indices = z_index(sorted_info)
 
     titles = get_titles(sorted_info[1])
 
-    return render_template('latin_object.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
+    return render_template('latin_object.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles, trans_z_index=z_indices[0], dep_z_index=z_indices[1])
 
 
 @app.route("/arsu_relief")
@@ -89,9 +97,18 @@ def arsu_relief():
     info = parse_query_data(data[0], data[1])
     sorted_info = sort_data([info[1], info[2]])
 
+    for d in sorted_info[1]:
+        counter = 0
+        for num in d[1]:
+            d[1][counter] = float(num) + .1
+            counter += 1
+        d[1][0] -= 2
+
+    z_indices = z_index(sorted_info)
+
     titles = get_titles(sorted_info[1])
 
-    return render_template('arsu_relief.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
+    return render_template('arsu_relief.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles, trans_z_index=z_indices[0], dep_z_index=z_indices[1])
 
 @app.route("/gad_relief")
 def gad_relief():
@@ -101,9 +118,18 @@ def gad_relief():
     info = parse_query_data(data[0], data[1])
     sorted_info = sort_data([info[1], info[2]])
 
+    for d in sorted_info[1]:
+        counter = 0
+        for num in d[1]:
+            d[1][counter] = float(num) + .1
+            counter += 1
+        d[1][0] -= 2
+
+    z_indices = z_index(sorted_info)
+
     titles = get_titles(sorted_info[1])
 
-    return render_template('gad_relief.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
+    return render_template('gad_relief.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles, trans_z_index=z_indices[0], dep_z_index=z_indices[1])
 
 @app.route("/julius_terentius")
 def julius_terentius():
@@ -113,9 +139,18 @@ def julius_terentius():
     info = parse_query_data(data[0], data[1])
     sorted_info = sort_data([info[1], info[2]])
 
+    for d in sorted_info[1]:
+        counter = 0
+        for num in d[1]:
+            d[1][counter] = float(num) + .1
+            counter += 1
+        d[1][0] -= 2
+
+    z_indices = z_index(sorted_info)
+
     titles = get_titles(sorted_info[1])
 
-    return render_template('julius_terentius.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
+    return render_template('julius_terentius.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles, trans_z_index=z_indices[0], dep_z_index=z_indices[1])
 
 @app.route("/mithras_relief")
 def mithras_relief():
@@ -125,9 +160,18 @@ def mithras_relief():
     info = parse_query_data(data[0], data[1])
     sorted_info = sort_data([info[1], info[2]])
 
+    for d in sorted_info[1]:
+        counter = 0
+        for num in d[1]:
+            d[1][counter] = float(num) + .1
+            counter += 1
+        d[1][0] -= 2
+
+    z_indices = z_index(sorted_info)
+
     titles = get_titles(sorted_info[1])
 
-    return render_template('mithras_relief.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
+    return render_template('mithras_relief.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles, trans_z_index=z_indices[0], dep_z_index=z_indices[1])
 
 @app.route("/votive_relief")
 def votive_relief():
@@ -137,9 +181,18 @@ def votive_relief():
     info = parse_query_data(data[0], data[1])
     sorted_info = sort_data([info[1], info[2]])
 
+    for d in sorted_info[1]:
+        counter = 0
+        for num in d[1]:
+            d[1][counter] = float(num) + .1
+            counter += 1
+        d[1][0] -= 2
+
+    z_indices = z_index(sorted_info)
+
     titles = get_titles(sorted_info[1])
 
-    return render_template('votive_relief.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles)
+    return render_template('votive_relief.html', image=info[0], translations=sorted_info[0], depictions=sorted_info[1], page_titles=titles, trans_z_index=z_indices[0], dep_z_index=z_indices[1])
 
 def parse_query_data(data, d2):
     image = data["results"]["bindings"][0]["image"]["value"]
@@ -212,6 +265,34 @@ def sort_data(parsed_data):
     return_data = [sorted(parsed_data[0], key=bound_area, reverse=True), sorted(parsed_data[1], key=bound_area, reverse=True)]
 
     return return_data
+
+# get z index of each bounding box
+def z_index(parsed_data):
+    merged_data = parsed_data[0] + parsed_data[1]
+    sorted_merged_data = sorted(merged_data, key=bound_area, reverse=True)
+    counter1 = 0
+    counter2 = 0
+    z1 = []
+    z2 = []
+
+    for d in parsed_data[0]:
+        for l in sorted_merged_data:
+            if d[1] == l[1]:
+                z1.append(counter2)
+            counter2 += 1
+        counter1 += 1
+        counter2 = 0
+
+    counter1 = 0
+    for d in parsed_data[1]:
+        for l in sorted_merged_data:
+            if d[1] == l[1]:
+                z2.append(counter2)
+            counter2 += 1
+        counter1 += 1
+        counter2 = 0
+    
+    return [z1, z2]
 
 def bound_area(element):
     if len(element) == 3:

@@ -53,12 +53,12 @@
                             <!--Depictions are added first here to ensure that translation bounding boxes are on top for selection when all boxes are visible.-->
                             {%for entry in depictions%}
                                 <a onclick="highlight(event)" href="#{{loop.index-1}}depicts">
-                                    <div class="boundingbox depictions" style="left: {{entry[1][0]}}%; top: {{entry[1][1]}}%; padding-right: {{entry[1][2]}}%; padding-bottom: {{entry[1][3]}}%;" id="{{loop.index-1}}depictspos"></div>
+                                    <div class="boundingbox depictions" style="left: {{entry[1][0]}}%; top: {{entry[1][1]}}%; padding-right: {{entry[1][2]}}%; padding-bottom: {{entry[1][3]}}%; z-index: {{dep_z_index[loop.index-1]}}" id="{{loop.index-1}}depictspos"></div>
                                 </a>
                             {%endfor%}
                             {%for entry in translations%}
                                 <a onclick="highlight(event)" href="#{{loop.index-1}}inscripts">
-                                    <div class="boundingbox inscriptions" style="left: {{entry[2][0]}}%; top: {{entry[2][1]}}%; padding-right: {{entry[2][2]}}%; padding-bottom: {{entry[2][3]}}%;" id="{{loop.index-1}}inscriptspos"></div>
+                                    <div class="boundingbox inscriptions" style="left: {{entry[2][0]}}%; top: {{entry[2][1]}}%; padding-right: {{entry[2][2]}}%; padding-bottom: {{entry[2][3]}}%; z-index: {{trans_z_index[loop.index-1]}}" id="{{loop.index-1}}inscriptspos"></div>
                                 </a>
                             {%endfor%}
                     </div>
@@ -189,7 +189,7 @@
                 }
                 
                 if (highlightedBox != null) {
-                    $(highlightedBox).css("border", "3px solid " + color);
+                    $(highlightedBox).css("border", "3px solid " + $(highlightedBox).css("border-left-color"));
                     $(highlightedDescript).css("border", "none");
                 }
 
