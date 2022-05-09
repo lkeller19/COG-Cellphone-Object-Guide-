@@ -75,12 +75,6 @@ def latin_inscription():
 
     info = parse_query_data(data[0], data[1])
     sorted_info = sort_data([info[1], info[2]])
-    for d in sorted_info[1]:
-        counter = 0
-        for num in d[1]:
-            d[1][counter] = float(num) + .1
-            counter += 1
-        d[1][0] -= 2
 
     z_indices = z_index(sorted_info)
 
@@ -97,13 +91,6 @@ def arsu_relief():
     info = parse_query_data(data[0], data[1])
     sorted_info = sort_data([info[1], info[2]])
 
-    for d in sorted_info[1]:
-        counter = 0
-        for num in d[1]:
-            d[1][counter] = float(num) + .1
-            counter += 1
-        d[1][0] -= 2
-
     z_indices = z_index(sorted_info)
 
     titles = get_titles(sorted_info[1])
@@ -117,13 +104,6 @@ def gad_relief():
 
     info = parse_query_data(data[0], data[1])
     sorted_info = sort_data([info[1], info[2]])
-
-    for d in sorted_info[1]:
-        counter = 0
-        for num in d[1]:
-            d[1][counter] = float(num) + .1
-            counter += 1
-        d[1][0] -= 2
 
     z_indices = z_index(sorted_info)
 
@@ -139,13 +119,6 @@ def julius_terentius():
     info = parse_query_data(data[0], data[1])
     sorted_info = sort_data([info[1], info[2]])
 
-    for d in sorted_info[1]:
-        counter = 0
-        for num in d[1]:
-            d[1][counter] = float(num) + .1
-            counter += 1
-        d[1][0] -= 2
-
     z_indices = z_index(sorted_info)
 
     titles = get_titles(sorted_info[1])
@@ -160,13 +133,6 @@ def mithras_relief():
     info = parse_query_data(data[0], data[1])
     sorted_info = sort_data([info[1], info[2]])
 
-    for d in sorted_info[1]:
-        counter = 0
-        for num in d[1]:
-            d[1][counter] = float(num) + .1
-            counter += 1
-        d[1][0] -= 2
-
     z_indices = z_index(sorted_info)
 
     titles = get_titles(sorted_info[1])
@@ -180,13 +146,6 @@ def votive_relief():
 
     info = parse_query_data(data[0], data[1])
     sorted_info = sort_data([info[1], info[2]])
-
-    for d in sorted_info[1]:
-        counter = 0
-        for num in d[1]:
-            d[1][counter] = float(num) + .1
-            counter += 1
-        d[1][0] -= 2
 
     z_indices = z_index(sorted_info)
 
@@ -268,6 +227,13 @@ def sort_data(parsed_data):
 
 # get z index of each bounding box
 def z_index(parsed_data):
+    for d in parsed_data[1]:
+        counter = 0
+        for num in d[1]:
+            d[1][counter] = float(num) + .1
+            counter += 1
+        d[1][0] -= 2
+
     merged_data = parsed_data[0] + parsed_data[1]
     sorted_merged_data = sorted(merged_data, key=bound_area, reverse=True)
     counter1 = 0
